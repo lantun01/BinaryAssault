@@ -1,0 +1,217 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e0c2324a9ab1224ebe3edad393e3544, type: 3}
+  m_Name: LastSession
+  m_EditorClassIdentifier: 
+  nodes:
+  - {fileID: 114169181978307576}
+  - {fileID: 114557632009779324}
+  - {fileID: 114783426640204596}
+  editorStates:
+  - {fileID: 114439308772343242}
+  livesInScene: 0
+--- !u!114 &114111910415282540
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42e7026d0da7df848ab67d517ac12d74, type: 3}
+  m_Name: Source
+  m_EditorClassIdentifier: 
+  body: {fileID: 114557632009779324}
+  side: 2
+  sidePosition: 53.5
+  sideOffset: 0
+  connections:
+  - {fileID: 114943996462334372}
+  typeID: SuperSource
+  calculationBlockade: 0
+--- !u!114 &114169181978307576
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da0a24bab1293f04d997dae2ec51c468, type: 3}
+  m_Name: Build Shader
+  m_EditorClassIdentifier: 
+  rect:
+    serializedVersion: 2
+    x: 494.09998
+    y: -653.80005
+    width: 400
+    height: 520
+  nodeKnobs:
+  - {fileID: 114736862399744342}
+  Inputs:
+  - {fileID: 114736862399744342}
+  Outputs: []
+  BuildErrorFlag: 0
+  BuildLightningSupport: 0
+--- !u!114 &114439308772343242
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6ab6487237ff124ea4c2aa5de9ce3fb, type: 3}
+  m_Name: MainEditorState
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  parentEditor: {fileID: 0}
+  drawing: 1
+  selectedNode: {fileID: 0}
+  LivePreviewShaderPath: Assets/Materiales&Shaders/Shaders/Mira_basic.shader
+  ShaderName: Mira_basic
+  ShaderInMemory: {fileID: 4800000, guid: 90af59755bd48c34d976f79f7731edbf, type: 3}
+  panOffset: {x: -500.8002, y: 381.8003}
+  zoom: 3
+--- !u!114 &114557632009779324
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c227bed38d7095d4ca0e793d05e14cea, type: 3}
+  m_Name: Source New Texture
+  m_EditorClassIdentifier: 
+  rect:
+    serializedVersion: 2
+    x: -526.49976
+    y: -436.39993
+    width: 148
+    height: 210
+  nodeKnobs:
+  - {fileID: 114111910415282540}
+  Inputs: []
+  Outputs:
+  - {fileID: 114111910415282540}
+  tex: {fileID: 2800000, guid: 138ee2d27c705ee448e702b772fc0ef6, type: 3}
+  MemoCount: 1
+--- !u!114 &114679495447246966
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42e7026d0da7df848ab67d517ac12d74, type: 3}
+  m_Name: RGBA
+  m_EditorClassIdentifier: 
+  body: {fileID: 114783426640204596}
+  side: 2
+  sidePosition: 103.5
+  sideOffset: 0
+  connections:
+  - {fileID: 114736862399744342}
+  typeID: SuperFloat4
+  calculationBlockade: 0
+--- !u!114 &114736862399744342
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4caff27366054dd44a30ddb5be369acc, type: 3}
+  m_Name: RGBA
+  m_EditorClassIdentifier: 
+  body: {fileID: 114169181978307576}
+  side: 4
+  sidePosition: 53.5
+  sideOffset: 0
+  connection: {fileID: 114679495447246966}
+  typeID: SuperFloat4
+--- !u!114 &114783426640204596
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 201c2e18f36d3ea40886702f0d2549cc, type: 3}
+  m_Name: Hologram FX
+  m_EditorClassIdentifier: 
+  rect:
+    serializedVersion: 2
+    x: -112.499825
+    y: -737.99994
+    width: 172
+    height: 250
+  nodeKnobs:
+  - {fileID: 114913107083226542}
+  - {fileID: 114943996462334372}
+  - {fileID: 114679495447246966}
+  Inputs:
+  - {fileID: 114913107083226542}
+  - {fileID: 114943996462334372}
+  Outputs:
+  - {fileID: 114679495447246966}
+  Variable: 1
+  Variable2: 4
+  parametersOK: 1
+  MemoCount: 1
+--- !u!114 &114913107083226542
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4caff27366054dd44a30ddb5be369acc, type: 3}
+  m_Name: UV
+  m_EditorClassIdentifier: 
+  body: {fileID: 114783426640204596}
+  side: 4
+  sidePosition: 103.5
+  sideOffset: 0
+  connection: {fileID: 0}
+  typeID: SuperFloat2
+--- !u!114 &114943996462334372
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4caff27366054dd44a30ddb5be369acc, type: 3}
+  m_Name: Source
+  m_EditorClassIdentifier: 
+  body: {fileID: 114783426640204596}
+  side: 4
+  sidePosition: 126.5
+  sideOffset: 0
+  connection: {fileID: 114111910415282540}
+  typeID: SuperSource
