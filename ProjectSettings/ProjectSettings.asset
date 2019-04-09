@@ -529,6 +529,7 @@ PlayerSettings:
   webGLThreadsSupport: 0
   scriptingDefineSymbols:
     1: dUI_DoozyUI
+    7: dUI_DoozyUI
   platformArchitecture: {}
   scriptingBackend: {}
   il2cppCompilerConfiguration: {}

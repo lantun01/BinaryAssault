@@ -3,64 +3,66 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.UI;
 
-public class Player : MonoBehaviour
+public class Player : Character
 {
     // Start is called before the first frame update
     [HideInInspector]
     public PlayerInput input;
     [HideInInspector]
     public Rigidbody2D rb;
+    [HideInInspector]
+    public int hashCaminar;
+    [HideInInspector]
+    public int hashMelee;
     public Animator animator;
     public Arma arma;
-    public int hastCaminar;
-    public float velocidad;
     public LayerMask layermask;
-    public Vector3[] posRecord = new Vector3[60];
     public TransformVariable transformValue;
     public CinemachineTargetGroup cineGroup;
+    public GameEvent RecibirAtaque;
+    public FloatVariable saludRatio;
 
-
-
-    private PlayerStateMachine state = new PlayerStateMachine();
+    [SerializeField]
+    private Image botonArma;
+    private List<ArmaData> armas = new List<ArmaData>();
+    private int armaActual;
+    private int cantidadArmas;
+    private PlayerStateMachine stateMachine = new PlayerStateMachine();
     private Material material;
     private int hologramId;
     private TrailRenderer trail;
     private Enemigo objetivo;
     private Enemigo previousEnemy;
     private CinemachineTargetGroup.Target target = new CinemachineTargetGroup.Target();
-    private int posCounter;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
         input = new PlayerInput();
         rb = GetComponent<Rigidbody2D>();
-        state.Inicializar();
-        hastCaminar = Animator.StringToHash("caminando");
+        stateMachine.Inicializar();
+        hashCaminar = Animator.StringToHash("caminando");
+        hashMelee = Animator.StringToHash("melee");
         material = GetComponent<SpriteRenderer>().material;
         hologramId = Shader.PropertyToID("_Hologram_Value_1");
         trail = GetComponent<TrailRenderer>();
-        posRecord[0] = transform.position;
-        posCounter++;
         transformValue.value = transform;
         target.weight = 1;
+        Inicializar();
     }
 
     private void Update()
     {
-        state.Act(this);
+        stateMachine.Act(this);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.GetComponent<ArmaDrop>())
         {
-            CambiarArma(collision.GetComponent<ArmaDrop>().Recoger());
-        }
-        else
-        {
-
+            AgregarArma(collision.GetComponent<ArmaDrop>().Recoger());
         }
     }
 
@@ -140,7 +142,7 @@ public class Player : MonoBehaviour
         animator.SetBool("dashing", true);
         trail.emitting = true;
         material.SetFloat(hologramId, 1);
-        StartCoroutine(state.SetWait(1f));
+        StartCoroutine(stateMachine.SetWait(1f));
         StartCoroutine(ChangeProperty(hologramId, 1f));
         rb.Mover(input.mirada, velocidad*5);
     }
@@ -168,6 +170,10 @@ public class Player : MonoBehaviour
                 previousEnemy = objetivo;
                 CambiarObjetivo();
             }
+            if ((transform.position-objetivo.transform.position).sqrMagnitude<4)
+            {
+                animator.SetTrigger(hashMelee);
+            }
         }
     }
 
@@ -183,9 +189,52 @@ public class Player : MonoBehaviour
        
     }
 
+    public void AgregarArma(ArmaData armaData)
+    {
+        cantidadArmas++;
+        armaActual = cantidadArmas-1;
+        armas.Add(armaData);
+        CambiarArma(armaData);
+    }
+
+    public void SiguienteArma()
+    {
+
+        //armaActual = armaActual == (cantidadArmas - 1 )? 0 : armaActual++;
+
+        if (armaActual == cantidadArmas - 1)
+        {
+            armaActual = 0;
+        }
+        else
+        {
+            armaActual++;
+        }
+
+        if (cantidadArmas>0)
+        {
+            CambiarArma(armas[armaActual]);
+        }
+
+    }
+
     internal void CambiarArma(ArmaData data)
     {
         arma.SetArma(data);
+        botonArma.sprite = data.sprite;
 
+    }
+
+    public void GetDamage(int cantidad)
+    {
+        saludActual -= cantidad;
+        saludRatio.value = GetSaludRatio();
+        RecibirAtaque?.Raise();
+
+    }
+
+    public void Actuar()
+    {
+        stateMachine.act(this);
     }
 }

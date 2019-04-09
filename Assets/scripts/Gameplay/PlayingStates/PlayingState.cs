@@ -14,7 +14,7 @@ public class PlayingState : State
         //Disparar
         if (player.input.disparar)
         {
-            player.Disparar();
+            Disparar(player);
         }
 
 
@@ -43,6 +43,10 @@ public class PlayingState : State
         Animar(player);
     }
 
+    public void Disparar(Player player)
+    {
+        player.Disparar();
+    }
 
     private void Animar(Player player)
     {
@@ -57,11 +61,11 @@ public class PlayingState : State
         
         if (player.input.Moviendo)
         {
-            player.animator.SetBool(player.hastCaminar,true);
+            player.animator.SetBool(player.hashCaminar,true);
         }
         else
         {
-            player.animator.SetBool(player.hastCaminar, false);
+            player.animator.SetBool(player.hashCaminar, false);
         }
     }
 }
