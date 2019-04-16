@@ -14,4 +14,11 @@ public static class TransformEx
         Vector3 rotacionV = new Vector3(0,0,angulo);
         transform.eulerAngles = rotacionV;
     }
+
+    public static float Angulo(this Vector3 direction)
+    {
+        float sign = direction.y < 0 ? -1 : 1;
+        float angulo = Vector3.Angle(Vector2.right, direction) * sign;
+        return angulo;
+    }
 }

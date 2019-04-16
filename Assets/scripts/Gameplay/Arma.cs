@@ -13,11 +13,20 @@ public class Arma : MonoBehaviour
     [SerializeField]
     private LineRenderer mira;
     private ArmaData data;
+    private int dispararHash;
     private bool armado;
+    private Animator animator;
 
     private void Awake()
     {
+        animator = GetComponent<Animator>();
         mira = GetComponent<LineRenderer>();
+        dispararHash = Animator.StringToHash("disparar");
+    }
+
+    public void AnimarDisparar()
+    {
+        animator.SetTrigger(dispararHash);
     }
 
     public void VolvearSprite(bool value)
@@ -61,9 +70,7 @@ public class Arma : MonoBehaviour
     {
         if (armado)
         {
-            Proyectil disparo = (Proyectil)Pooler.instance.SpawnObjeto(proyectil);
-            disparo.transform.position = transform.position;
-            disparo.Proyectar(mirada, 10);
+            data.Disparar(transform, mirada);
         }
     
     }

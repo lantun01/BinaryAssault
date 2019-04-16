@@ -62,10 +62,12 @@ public class PlayingState : State
         if (player.input.Moviendo)
         {
             player.animator.SetBool(player.hashCaminar,true);
+            player.SetEmisionPolvo(true);
         }
         else
         {
             player.animator.SetBool(player.hashCaminar, false);
+            player.SetEmisionPolvo(false);
         }
     }
 }

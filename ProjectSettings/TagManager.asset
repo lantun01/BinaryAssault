@@ -41,3 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Muralla Superior
+    uniqueID: 1486348689
+    locked: 0
+  - name: Elementos
+    uniqueID: 1649461977
+    locked: 0
+  - name: Muralla Inferior
+    uniqueID: 703478291
+    locked: 0

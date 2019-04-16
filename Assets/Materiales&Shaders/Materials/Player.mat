@@ -68,8 +68,8 @@ Material:
     - KaleidoscopeUV_PosX_1: 0.271
     - KaleidoscopeUV_PosY_1: 1.357
     - PixelSnap: 0
-    - PixelXYUV_SizeX_1: 32
-    - PixelXYUV_SizeY_1: 32
+    - PixelXYUV_SizeX_1: 43.635
+    - PixelXYUV_SizeY_1: 8.144
     - _Add_Fade_1: 0
     - _AlphaAsAura_Fade_1: 1
     - _AuraDisplacementPack_Size_1: 1
@@ -83,6 +83,20 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EnableExternalAlpha: 0
+    - _Generate_3DPlanet_CloudDistortion_1: 1.744
+    - _Generate_3DPlanet_CloudIntensity_1: -0.095
+    - _Generate_3DPlanet_CloudVolume_1: 0.522
+    - _Generate_3DPlanet_HaloIntensity_1: 0.4
+    - _Generate_3DPlanet_HaloSize_1: -0.045
+    - _Generate_3DPlanet_InsideShadow_1: 0.126
+    - _Generate_3DPlanet_LightDirection_X_1: -1.147
+    - _Generate_3DPlanet_LightDirection_Y_1: -1.643
+    - _Generate_3DPlanet_LightDirection_Z_1: 0.914
+    - _Generate_3DPlanet_RotationX_1: 0.101
+    - _Generate_3DPlanet_RotationY_1: 0.133
+    - _Generate_3DPlanet_Speed_1: -0.235
+    - _Generate_3DPlanet_StrangeX_1: 0.297
+    - _Generate_3DPlanet_StrangeY_1: -0.032
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -90,11 +104,14 @@ Material:
     - _Hologram_Value_1: 0
     - _InnerGlowHQ_Intensity_1: 0
     - _InnerGlowHQ_Size_1: 3
+    - _LerpUV_Fade_1: 0
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
+    - _OperationBlend_Fade_1: 0
+    - _OutlineEmpty_Size_1: 5.514
     - _Outline_HDR_1: 1
-    - _Outline_Size_1: 1.197
+    - _Outline_Size_1: 2
     - _Parallax: 0.02
     - _RGBA_Add_Fade_1: 1.784
     - _SetTimer: 0
@@ -114,7 +131,13 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
+    - _Generate_3DPlanet_CloudColor_1: {r: 0.6486502, g: 0.04576898, b: 0.00383091,
+        a: 0.1344416}
+    - _Generate_3DPlanet_HaloColor_1: {r: 0.1700116, g: 0.05716026, b: 0.2595478,
+        a: 0.841851}
+    - _Generate_3DPlanet_Light_Color_1: {r: 0.353443, g: 0.538434, b: 0.725597, a: 0.1747127}
     - _InnerGlowHQ_Color_1: {r: 1, g: 0.039973527, b: 0, a: 1}
-    - _Outline_Color_1: {r: 0.5515446, g: 1, b: 0.1273585, a: 1}
+    - _OutlineEmpty_Color_1: {r: 0.7877358, g: 1, b: 0.97043675, a: 1}
+    - _Outline_Color_1: {r: 0, g: 1, b: 0.9248905, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
     - _TintRGBA_Color_1: {r: 1, g: 1, b: 1, a: 1}

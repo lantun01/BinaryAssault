@@ -9,6 +9,7 @@ public class PlayerStateMachine
     public WaitState waiting = new WaitState();
     public Action<Player> act;
     private State currentState;
+    public delegate void PostWait();
    
 
     public void Inicializar()
@@ -35,6 +36,21 @@ public class PlayerStateMachine
         currentState = playing;
         act = playing.Disparar;
     }
+
+    public IEnumerator SetWait(float time, PostWait PostWaitAction)
+    {
+        currentState = waiting;
+        act = DoNothing;
+
+        for (int i = 0; i < time * 10; i++)
+        {
+            yield return null;
+        }
+        currentState = playing;
+        act = playing.Disparar;
+        PostWaitAction.Invoke();
+    }
+
 
     public void DoNothing(Player player)
     {

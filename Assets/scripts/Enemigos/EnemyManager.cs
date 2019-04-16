@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     public static EnemyManager instance;
+    public Transform targeCircle;
+    private Enemigo target;
 
     private void Awake()
     {
@@ -16,6 +18,7 @@ public class EnemyManager : MonoBehaviour
     {
         if (enemigos.Count!=0)
         {
+            targeCircle.gameObject.SetActive(true);
             int indice = 0;
             float min = (enemigos[0].transform.position - pos).sqrMagnitude;
             for (int i = 0; i < enemigos.Count; i++)
@@ -27,11 +30,13 @@ public class EnemyManager : MonoBehaviour
                     indice = i;
                 }
             }
-
-            return enemigos[indice];
+            target = enemigos[indice];
+            targeCircle.transform.position = target.TargetPos();
+            return target;
         }
         else
         {
+            target.gameObject.SetActive(false);
             return null;
         }
     }

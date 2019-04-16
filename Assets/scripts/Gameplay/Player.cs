@@ -22,20 +22,30 @@ public class Player : Character
     public TransformVariable transformValue;
     public CinemachineTargetGroup cineGroup;
     public GameEvent RecibirAtaque;
+    public GameEvent disparar;
     public FloatVariable saludRatio;
+    public ParticleSystem dashTrail;
 
     [SerializeField]
     private Image botonArma;
+    [SerializeField]
+    private float dashTime;
+
     private List<ArmaData> armas = new List<ArmaData>();
+    public ParticleSystem polvoCaminar;
+    private ParticleSystem.EmissionModule polvoEmission;
+    private ParticleSystem.EmissionModule dashEmission;
     private int armaActual;
     private int cantidadArmas;
     private PlayerStateMachine stateMachine = new PlayerStateMachine();
     private Material material;
-    private int hologramId;
+    private int hologramId, blendOutlineId; //Shaders prop
     private TrailRenderer trail;
     private Enemigo objetivo;
     private Enemigo previousEnemy;
     private CinemachineTargetGroup.Target target = new CinemachineTargetGroup.Target();
+    private delegate void AccionPostDash();
+
 
     private void Awake()
     {
@@ -47,9 +57,12 @@ public class Player : Character
         hashMelee = Animator.StringToHash("melee");
         material = GetComponent<SpriteRenderer>().material;
         hologramId = Shader.PropertyToID("_Hologram_Value_1");
+        blendOutlineId = Shader.PropertyToID("_OperationBlend_Fade_1");
         trail = GetComponent<TrailRenderer>();
         transformValue.value = transform;
         target.weight = 1;
+        polvoEmission = polvoCaminar.emission;
+        dashEmission = dashTrail.emission;
         Inicializar();
     }
 
@@ -93,11 +106,11 @@ public class Player : Character
 
         if (voltear)
         {
-            arma.transform.localPosition = new Vector3(-0.3f, 0, 0);
+            arma.transform.localPosition = new Vector3(-0.13f, -0.25f, 0);
         }
         else
         {
-            arma.transform.localPosition = new Vector3(0.3f, 0, 0);
+            arma.transform.localPosition = new Vector3(0.13f, -0.25f, 0);
         }
     }
 
@@ -112,6 +125,8 @@ public class Player : Character
             arma.Disparar(input.mirada);
 
         }
+
+        disparar?.Raise();
     }
 
     internal void Mover()
@@ -140,11 +155,15 @@ public class Player : Character
     internal void Dash()
     {
         animator.SetBool("dashing", true);
-        trail.emitting = true;
+        //trail.emitting = true;
         material.SetFloat(hologramId, 1);
-        StartCoroutine(stateMachine.SetWait(1f));
-        StartCoroutine(ChangeProperty(hologramId, 1f));
-        rb.Mover(input.mirada, velocidad*5);
+        material.SetFloat(blendOutlineId, 1);
+        dashEmission.enabled = true;
+        StartCoroutine(stateMachine.SetWait(dashTime, ()=> { dashEmission.enabled = false; }));
+        StartCoroutine(ChangeProperty(hologramId,dashTime));
+        StartCoroutine(ChangeProperty(blendOutlineId, dashTime));
+        rb.Mover(input.mirada, 10);
+        
     }
 
 
@@ -160,6 +179,18 @@ public class Player : Character
         trail.emitting = false;
     }
 
+    private IEnumerator Translate(Transform trans, Vector3 direccion, float velocidad, float tiempo)
+    {
+        Vector3 dir = direccion;
+        velocidad = velocidad / (tiempo * 30);
+        for (int i = 0; i < tiempo*30; i++)
+        {
+            trans.position += dir * velocidad;
+            yield return null;
+        }
+    }
+
+
     private void EscanearObjetivo()
     {
         if (EnemyManager.instance)
@@ -170,10 +201,10 @@ public class Player : Character
                 previousEnemy = objetivo;
                 CambiarObjetivo();
             }
-            if ((transform.position-objetivo.transform.position).sqrMagnitude<4)
-            {
-                animator.SetTrigger(hashMelee);
-            }
+            //if ((transform.position-objetivo.transform.position).sqrMagnitude<4)
+            //{
+            //    animator.SetTrigger(hashMelee);
+            //}
         }
     }
 
@@ -236,5 +267,10 @@ public class Player : Character
     public void Actuar()
     {
         stateMachine.act(this);
+    }
+
+    public void SetEmisionPolvo(bool value)
+    {
+        polvoEmission.enabled = value;
     }
 }

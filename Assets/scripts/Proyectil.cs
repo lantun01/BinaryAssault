@@ -1,14 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Utils;
+using System;
 
 public class Proyectil : IPooleable
 {
-    public Rigidbody2D rb;
+    private float time;
+    public Vector3 posInicial;
+    public float angulo;
+    private PatronDisparo patron;
 
     public override void Activar()
     {
         gameObject.SetActive(true);
+        time = 0;
+    }
+
+    private void Update()
+    {
+        time += Time.deltaTime;
+        transform.position = posInicial + patron.Posicion(time, 8 , angulo);
     }
 
 
@@ -17,11 +29,12 @@ public class Proyectil : IPooleable
         gameObject.SetActive(false);
     }
 
-    public void Proyectar(Vector2 direccion, float velocidad)
-    {
-        rb.velocity = direccion * velocidad;
-    }
+   
 
+    public void SetPatron(PatronDisparo patron)
+    {
+        this.patron = patron;
+    }
 
     public override void Reiniciar()
     {
@@ -45,3 +58,4 @@ public class Proyectil : IPooleable
         Desactivar();
     }
 }
+
