@@ -54,7 +54,6 @@ public class Arma : MonoBehaviour
 
     public void SetArma(ArmaData armaData)
     {
-        armado = true;
         data = armaData;
         sprite.sprite = data.sprite;
         proyectil = data.proyectil;
@@ -68,10 +67,6 @@ public class Arma : MonoBehaviour
 
     internal void Disparar(Vector3 mirada)
     {
-        if (armado)
-        {
-            data.Disparar(transform, mirada);
-        }
-    
+        data?.Disparar(transform, mirada);
     }
 }

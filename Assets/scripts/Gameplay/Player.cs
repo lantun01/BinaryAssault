@@ -9,13 +9,11 @@ public class Player : Character
 {
     // Start is called before the first frame update
     [HideInInspector]
-    public PlayerInput input;
-    [HideInInspector]
-    public Rigidbody2D rb;
-    [HideInInspector]
     public int hashCaminar;
     [HideInInspector]
     public int hashMelee;
+    [HideInInspector]
+    public int hashDash;
     public Animator animator;
     public Arma arma;
     public LayerMask layermask;
@@ -25,11 +23,14 @@ public class Player : Character
     public GameEvent disparar;
     public FloatVariable saludRatio;
     public ParticleSystem dashTrail;
+    public DashSkill dashSkill;
+    public bool enCombate;
 
     [SerializeField]
     private Image botonArma;
     [SerializeField]
     private float dashTime;
+    public FloatingJoystick joystick;
 
     private List<ArmaData> armas = new List<ArmaData>();
     public ParticleSystem polvoCaminar;
@@ -44,17 +45,20 @@ public class Player : Character
     private Enemigo objetivo;
     private Enemigo previousEnemy;
     private CinemachineTargetGroup.Target target = new CinemachineTargetGroup.Target();
+    private SpriteRenderer spriteRenderer;
     private delegate void AccionPostDash();
+    private bool armado;
 
 
     private void Awake()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-        input = new PlayerInput();
         rb = GetComponent<Rigidbody2D>();
         stateMachine.Inicializar();
         hashCaminar = Animator.StringToHash("caminando");
         hashMelee = Animator.StringToHash("melee");
+        hashDash = Animator.StringToHash("dashing");
         material = GetComponent<SpriteRenderer>().material;
         hologramId = Shader.PropertyToID("_Hologram_Value_1");
         blendOutlineId = Shader.PropertyToID("_OperationBlend_Fade_1");
@@ -101,7 +105,7 @@ public class Player : Character
 
     private void Voltear(bool voltear)
     {
-        GetComponent<SpriteRenderer>().flipX = voltear;
+        spriteRenderer.flipX = voltear;
         arma.VolvearSprite(voltear);
 
         if (voltear)
@@ -122,7 +126,7 @@ public class Player : Character
         }
         else
         {
-            arma.Disparar(input.mirada);
+            arma.Disparar(joystick.mirada);
 
         }
 
@@ -131,7 +135,7 @@ public class Player : Character
 
     internal void Mover()
     {
-        rb.Mover(input.movimiento, velocidad);
+        rb.Mover(joystick.Direction, velocidad);
         RotarArma();
         EscanearObjetivo();
     }
@@ -140,31 +144,37 @@ public class Player : Character
     {
         if (objetivo)
         {
-            arma.ActivarMira();
             arma.ActualizarMira(objetivo.transform.position);
             arma.transform.Rotar(objetivo.transform.position-arma.transform.position);
-            Debug.DrawLine(arma.transform.position, objetivo.transform.position, Color.yellow);
         }
         else
         {
             arma.DesactivarMira();
-            arma.transform.Rotar(input.mirada);
+            arma.transform.Rotar(mirada);
         }
     }
 
-    internal void Dash()
+    public void Dash()
     {
-        animator.SetBool("dashing", true);
-        //trail.emitting = true;
-        material.SetFloat(hologramId, 1);
-        material.SetFloat(blendOutlineId, 1);
-        dashEmission.enabled = true;
-        StartCoroutine(stateMachine.SetWait(dashTime, ()=> { dashEmission.enabled = false; }));
-        StartCoroutine(ChangeProperty(hologramId,dashTime));
-        StartCoroutine(ChangeProperty(blendOutlineId, dashTime));
-        rb.Mover(input.mirada, 10);
-        
+
+        void DashStart()
+        {
+            animator.SetBool(hashDash, true);
+            //trail.emitting = true;
+            material.SetFloat(hologramId, 1);
+            material.SetFloat(blendOutlineId, 1);
+            dashEmission.enabled = true;
+            StartCoroutine(stateMachine.SetWait(dashTime, () => { dashEmission.enabled = false; }));
+        }
+
+        void DashEnd()
+        {
+            StartCoroutine(ChangeProperty(hologramId, dashTime));
+            StartCoroutine(ChangeProperty(blendOutlineId, dashTime));
+        }
+        dashSkill.Execute(this, DashStart, DashEnd);
     }
+
 
 
     internal IEnumerator ChangeProperty(int id, float time)
@@ -175,7 +185,7 @@ public class Player : Character
             yield return null;
         }
         material.SetFloat(id, 0);
-        animator.SetBool("dashing", false);
+        animator.SetBool(hashDash, false);
         trail.emitting = false;
     }
 
@@ -201,10 +211,6 @@ public class Player : Character
                 previousEnemy = objetivo;
                 CambiarObjetivo();
             }
-            //if ((transform.position-objetivo.transform.position).sqrMagnitude<4)
-            //{
-            //    animator.SetTrigger(hashMelee);
-            //}
         }
     }
 
@@ -217,7 +223,6 @@ public class Player : Character
     private bool ObjetivoDerecha()
     {
             return transform.position.x < objetivo.transform.position.x;
-       
     }
 
     public void AgregarArma(ArmaData armaData)
@@ -230,9 +235,6 @@ public class Player : Character
 
     public void SiguienteArma()
     {
-
-        //armaActual = armaActual == (cantidadArmas - 1 )? 0 : armaActual++;
-
         if (armaActual == cantidadArmas - 1)
         {
             armaActual = 0;
@@ -272,5 +274,17 @@ public class Player : Character
     public void SetEmisionPolvo(bool value)
     {
         polvoEmission.enabled = value;
+    }
+
+    public void EntrarEnCombate()
+    {
+        enCombate = true;
+        arma.ActivarMira();
+    }
+
+    public void AbandonarCombate()
+    {
+        enCombate = false;
+        arma.DesactivarMira();
     }
 }

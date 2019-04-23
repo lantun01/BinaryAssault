@@ -9,7 +9,7 @@ public class PlayerStateMachine
     public WaitState waiting = new WaitState();
     public Action<Player> act;
     private State currentState;
-    public delegate void PostWait();
+    public delegate void Resolver();
    
 
     public void Inicializar()
@@ -37,7 +37,7 @@ public class PlayerStateMachine
         act = playing.Disparar;
     }
 
-    public IEnumerator SetWait(float time, PostWait PostWaitAction)
+    public IEnumerator SetWait(float time, Resolver PostWaitAction)
     {
         currentState = waiting;
         act = DoNothing;

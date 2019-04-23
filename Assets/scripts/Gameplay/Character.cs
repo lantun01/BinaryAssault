@@ -9,6 +9,9 @@ public class Character : MonoBehaviour
     [SerializeField]
     protected float velocidad;
     private int _saludActual;
+    public Rigidbody2D rb;
+    public Vector2 mirada;
+    public Vector3 dirMov;
     protected int saludActual { get=>_saludActual; set
         {
             if (value<0)
