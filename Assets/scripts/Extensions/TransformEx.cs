@@ -21,4 +21,9 @@ public static class TransformEx
         float angulo = Vector3.Angle(Vector2.right, direction) * sign;
         return angulo;
     }
+
+    public static void Mover(this Transform tranform, Vector3 direction, float speed)
+    {
+        tranform.position += direction * speed*Time.deltaTime;
+    }
 }

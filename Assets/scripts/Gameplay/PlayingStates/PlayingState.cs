@@ -11,7 +11,6 @@ public class PlayingState : State
         player.mirada = player.joystick.mirada;
         player.Mover();
         Animar(player);
-        Debug.Log(player.mirada);
     }
 
     public void Disparar(Player player)

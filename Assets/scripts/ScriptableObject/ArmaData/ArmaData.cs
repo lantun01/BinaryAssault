@@ -9,6 +9,7 @@ public abstract class ArmaData : ScriptableObject
     public PatronDisparo patron;
     public int damage;
     public float speed;
+    public float fireRate;
     public abstract void Disparar(Transform arma, Vector3 direccion);
     
 }

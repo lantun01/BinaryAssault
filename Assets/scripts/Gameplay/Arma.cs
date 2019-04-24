@@ -67,6 +67,9 @@ public class Arma : MonoBehaviour
 
     internal void Disparar(Vector3 mirada)
     {
+
         data?.Disparar(transform, mirada);
     }
+
+    
 }

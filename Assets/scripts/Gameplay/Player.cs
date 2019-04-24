@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.UI;
+using Utils;
 
 public class Player : Character
 {
@@ -14,6 +15,7 @@ public class Player : Character
     public int hashMelee;
     [HideInInspector]
     public int hashDash;
+    public float dashSpeed;
     public Animator animator;
     public Arma arma;
     public LayerMask layermask;
@@ -135,9 +137,10 @@ public class Player : Character
 
     internal void Mover()
     {
-        rb.Mover(joystick.Direction, velocidad);
+        //rb.Mover(joystick.Direction, velocidad);
         RotarArma();
         EscanearObjetivo();
+        transform.Mover(joystick.Direction, 2);
     }
 
     internal void RotarArma()
@@ -160,46 +163,25 @@ public class Player : Character
         void DashStart()
         {
             animator.SetBool(hashDash, true);
-            //trail.emitting = true;
             material.SetFloat(hologramId, 1);
             material.SetFloat(blendOutlineId, 1);
-            dashEmission.enabled = true;
-            StartCoroutine(stateMachine.SetWait(dashTime, () => { dashEmission.enabled = false; }));
+            StartCoroutine(stateMachine.SetWait(dashTime));
         }
 
         void DashEnd()
         {
-            StartCoroutine(ChangeProperty(hologramId, dashTime));
-            StartCoroutine(ChangeProperty(blendOutlineId, dashTime));
+            material.SetFloat(hologramId, 0);
+            material.SetFloat(blendOutlineId, 0);
+            animator.SetBool(hashDash, false);
         }
-        dashSkill.Execute(this, DashStart, DashEnd);
+
+
+        // dashSkill.Execute(this, DashStart, DashEnd);
+        DashStart();
+        StartCoroutine(Corroutines.DashTransform(transform,joystick.mirada, dashTime, dashSpeed));
+        StartCoroutine(Corroutines.Wait(dashTime, () => dashEmission.enabled = true, () => dashEmission.enabled = false));
+        StartCoroutine(Corroutines.Wait(dashTime, DashStart, DashEnd));
     }
-
-
-
-    internal IEnumerator ChangeProperty(int id, float time)
-    {
-        material.SetFloat(id, 1);
-        for (int i = 0; i < time*10; i++)
-        {
-            yield return null;
-        }
-        material.SetFloat(id, 0);
-        animator.SetBool(hashDash, false);
-        trail.emitting = false;
-    }
-
-    private IEnumerator Translate(Transform trans, Vector3 direccion, float velocidad, float tiempo)
-    {
-        Vector3 dir = direccion;
-        velocidad = velocidad / (tiempo * 30);
-        for (int i = 0; i < tiempo*30; i++)
-        {
-            trans.position += dir * velocidad;
-            yield return null;
-        }
-    }
-
 
     private void EscanearObjetivo()
     {
