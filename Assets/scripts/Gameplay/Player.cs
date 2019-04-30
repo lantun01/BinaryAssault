@@ -70,10 +70,13 @@ public class Player : Character, IUpdateable
         polvoEmission = polvoCaminar.emission;
         dashEmission = dashTrail.emission;
         Inicializar();
+    }
+
+    private void Start()
+    {
         Subscribir();
     }
 
- 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

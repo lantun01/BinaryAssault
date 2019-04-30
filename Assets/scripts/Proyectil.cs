@@ -9,7 +9,8 @@ public class Proyectil : Pooleable, IUpdateable
     private PatronDisparo patron;
 
 
-    private void Awake()
+
+    private void Start()
     {
         Subscribir();
     }
