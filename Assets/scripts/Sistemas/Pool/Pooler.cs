@@ -5,24 +5,31 @@ using UnityEngine;
 
 public class Pooler : MonoBehaviour
 {
-    public Dictionary<IPooleable, Queue<IPooleable>> pool = new Dictionary<IPooleable, Queue<IPooleable>>();
+    public Dictionary<Pooleable, Queue<Pooleable>> pool = new Dictionary<Pooleable, Queue<Pooleable>>();
+    public List<PreloadedObject> preloadedObjects;
     public static Pooler instance;
-    private IPooleable nuevoObj;
+    private Pooleable nuevoObj;
     private int defaultQuantity = 10;
 
     private void Awake()
     {
         instance = this;
+        for (int i = 0; i < preloadedObjects.Count; i++)
+        {
+            CrearPool(preloadedObjects[i].pooleable, preloadedObjects[i].amount);
+        }
     }
 
-    public void CrearPool(IPooleable pooleable, int cantidad)
+    
+
+    public void CrearPool(Pooleable pooleable, int cantidad)
     {
         if (!pool.ContainsKey(pooleable))
         {
-            Queue<IPooleable> qpool = new Queue<IPooleable>();
+            Queue<Pooleable> qpool = new Queue<Pooleable>();
             for (int i = 0; i < cantidad; i++)
             {
-                IPooleable obj = Instantiate(pooleable);
+                Pooleable obj = Instantiate(pooleable);
                 obj.Desactivar();
                 qpool.Enqueue(obj);
 
@@ -37,17 +44,17 @@ public class Pooler : MonoBehaviour
     }
 
   
-    private void GrowPool(IPooleable pooleable, int cantidad)
+    private void GrowPool(Pooleable pooleable, int cantidad)
     {
         for (int i = 0; i < cantidad; i++)
         {
-            IPooleable obj = Instantiate(pooleable);
+            Pooleable obj = Instantiate(pooleable);
             obj.Desactivar();
             pool[pooleable].Enqueue(obj);
         }
     }
 
-    public IPooleable SpawnObjeto(IPooleable obj)
+    public Pooleable SpawnObjeto(Pooleable obj)
     {
         if (!pool.ContainsKey(obj))
         {

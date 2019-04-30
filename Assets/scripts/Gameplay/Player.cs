@@ -6,7 +6,7 @@ using Cinemachine;
 using UnityEngine.UI;
 using Utils;
 
-public class Player : Character
+public class Player : Character, IUpdateable
 {
     // Start is called before the first frame update
     [HideInInspector]
@@ -66,16 +66,14 @@ public class Player : Character
         blendOutlineId = Shader.PropertyToID("_OperationBlend_Fade_1");
         trail = GetComponent<TrailRenderer>();
         transformValue.value = transform;
-        target.weight = 1;
+        target.weight = 5;
         polvoEmission = polvoCaminar.emission;
         dashEmission = dashTrail.emission;
         Inicializar();
+        Subscribir();
     }
 
-    private void Update()
-    {
-        stateMachine.Act(this);
-    }
+ 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -188,10 +186,15 @@ public class Player : Character
         if (EnemyManager.instance)
         {
             objetivo = EnemyManager.instance.GetNerbyEnemy(transform.position);
-            if (objetivo!=previousEnemy)
+            if (objetivo && objetivo!=previousEnemy)
             {
+                target.weight = 5;
                 previousEnemy = objetivo;
                 CambiarObjetivo();
+            }
+            else
+            {
+                target.weight = 0;
             }
         }
     }
@@ -268,5 +271,15 @@ public class Player : Character
     {
         enCombate = false;
         arma.DesactivarMira();
+    }
+
+    public void CustomUpdate()
+    {
+        stateMachine.Act(this);
+    }
+
+    public void Subscribir()
+    {
+        UpdateManager.instance.Subscribe(this);
     }
 }

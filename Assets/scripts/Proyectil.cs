@@ -1,26 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
-using Utils;
-using System;
 
-public class Proyectil : IPooleable
+public class Proyectil : Pooleable, IUpdateable
 {
     private float time;
     public Vector3 posInicial;
     public float angulo;
     private PatronDisparo patron;
 
+
+    private void Awake()
+    {
+        Subscribir();
+    }
+
     public override void Activar()
     {
         gameObject.SetActive(true);
         time = 0;
-    }
-
-    private void Update()
-    {
-        time += Time.deltaTime;
-        transform.position = posInicial + patron.Posicion(time, 8 , angulo);
     }
 
 
@@ -43,9 +40,8 @@ public class Proyectil : IPooleable
 
 
 
-    public override void Subscribir()
+    public override void Subscribir(IPooleableCaller caller)
     {
-        throw new System.NotImplementedException();
     }
 
     private void OnBecameInvisible()
@@ -56,6 +52,20 @@ public class Proyectil : IPooleable
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Desactivar();
+    }
+
+    public void CustomUpdate()
+    {
+        if (isActiveAndEnabled)
+        {
+        time += Time.deltaTime;
+        transform.position = posInicial + patron.Posicion(time, 8, angulo);
+        }
+    }
+
+    public void Subscribir()
+    {
+        UpdateManager.instance.Subscribe(this);
     }
 }
 

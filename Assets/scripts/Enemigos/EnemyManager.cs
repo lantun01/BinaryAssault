@@ -5,20 +5,43 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     public static EnemyManager instance;
-    public Transform targeCircle;
+    public Transform targetCircle;
     private Enemigo target;
+    public List<Enemigo> enemigos;
 
     private void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+
     }
-    public List<Enemigo> enemigos;
+
+
+    public void AddEnemigo(Enemigo enemigo)
+    {
+        enemigos.Add(enemigo);
+    }
+
+    public void RemoveEnemigo(Enemigo enemigo)
+    {
+        enemigos.Remove(enemigo);
+    }
+
+    public void StartEncounter()
+    {
+        targetCircle.gameObject.SetActive(true);
+    }
 
     public Enemigo GetNerbyEnemy(Vector3 pos)
     {
         if (enemigos.Count!=0)
         {
-            targeCircle.gameObject.SetActive(true);
             int indice = 0;
             float min = (enemigos[0].transform.position - pos).sqrMagnitude;
             for (int i = 0; i < enemigos.Count; i++)
@@ -31,12 +54,13 @@ public class EnemyManager : MonoBehaviour
                 }
             }
             target = enemigos[indice];
-            targeCircle.transform.position = target.TargetPos();
+            targetCircle.transform.position = target.TargetPos();
             return target;
         }
         else
         {
-            target.gameObject.SetActive(false);
+
+            targetCircle.gameObject.SetActive(false);
             return null;
         }
     }

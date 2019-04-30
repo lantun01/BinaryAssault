@@ -44,12 +44,18 @@ public class Arma : MonoBehaviour
 
     public void ActivarMira()
     {
+        if (data.tieneMira)
+        {
         mira.enabled = true;
+        }
     }
 
     public void DesactivarMira()
     {
+        if (data && data.tieneMira)
+        {
         mira.enabled = false;
+        }
     }
 
     public void SetArma(ArmaData armaData)
@@ -61,8 +67,11 @@ public class Arma : MonoBehaviour
 
     public void ActualizarMira(Vector3 posicion)
     {
+        if (data && data.tieneMira)
+        {
         mira.SetPosition(0, transform.position);
         mira.SetPosition(1, posicion);
+        }
     }
 
     internal void Disparar(Vector3 mirada)

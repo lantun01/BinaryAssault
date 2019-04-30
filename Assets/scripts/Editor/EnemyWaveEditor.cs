@@ -18,18 +18,24 @@ public class EnemyWaveEditor : Editor
 
     public void OnSceneGUI()
     {
+        int waveid = 0;
         EnemyWaveManager manager = (EnemyWaveManager)target;
         foreach (EnemyWave wave in manager.waves)
         {
-            foreach (EnemySpawn spawn in wave.enemigos)
+            if (wave.show)
             {
-                int id = 0;
-                var field = spawn.GetType().GetField("spawnPosition");
-                spawn.spawnPosition = Handles.FreeMoveHandle(spawn.spawnPosition, Quaternion.identity, 0.5f, Vector2.zero, Handles.CylinderHandleCap);
-                Handles.color = Color.red;
-                Handles.Label(spawn.spawnPosition, "Enemigo", style);
-
+                int enemyid = 0;
+                Handles.color = wave.color;
+                foreach (EnemySpawn spawn in wave.enemigos)
+                {
+                    var field = spawn.GetType().GetField("spawnPosition");
+                    spawn.spawnPosition = Handles.FreeMoveHandle(spawn.spawnPosition, Quaternion.identity, 0.5f, Vector2.zero, Handles.CylinderHandleCap);
+                    Handles.Label(spawn.spawnPosition, "E_"+enemyid+"_"+waveid, style);
+                    enemyid++;
+                }
             }
+            waveid++;
+
         }
     }
 
