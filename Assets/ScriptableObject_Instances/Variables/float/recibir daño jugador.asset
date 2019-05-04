@@ -1,14 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae199339f66caed42adc5c03204b21f9, type: 3}
-  m_Name: "recibir da\xF1o jugador"
-  m_EditorClassIdentifier: 
+version https://git-lfs.github.com/spec/v1
+oid sha256:d7496030c0698f562410095b1fa2bc9f9f406f275e7af245d5b6ce458a8d02b4
+size 414

@@ -1,17 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d125cd551938f4469cac385543adf35, type: 3}
-  m_Name: Woosh In
-  m_EditorClassIdentifier: 
-  soundName: Woosh In
-  audioClip: {fileID: 8300000, guid: 15bd29e2821fdd1499d32c80b6d17f45, type: 3}
-  soundType: 0
+version https://git-lfs.github.com/spec/v1
+oid sha256:20355f70e605f4986ed31c219eda3c23f2e4bcfdfd8fe9c01ef6d2ffe545f995
+size 514

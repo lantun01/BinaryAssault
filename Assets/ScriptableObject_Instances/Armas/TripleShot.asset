@@ -1,28 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb31d6dd360199a48ad2d06470a5c26c, type: 3}
-  m_Name: TripleShot
-  m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 3aa23f91583ecb042b750414e7482efd, type: 3}
-  proyectil: {fileID: 882562684776354973, guid: c1014798d11555c4a9868d4dfd6899c0,
-    type: 3}
-  patron: {fileID: 11400000, guid: f116e2123c457994ea99425ceb68f04c, type: 2}
-  damage: 0
-  speed: 0
-  proyectil2: {fileID: 882562684776354973, guid: c1014798d11555c4a9868d4dfd6899c0,
-    type: 3}
-  proyectil3: {fileID: 882562684776354973, guid: c1014798d11555c4a9868d4dfd6899c0,
-    type: 3}
-  patron2: {fileID: 11400000, guid: f116e2123c457994ea99425ceb68f04c, type: 2}
-  patron3: {fileID: 11400000, guid: f116e2123c457994ea99425ceb68f04c, type: 2}
-  angulo: 0
-  separacion: 0.5
+version https://git-lfs.github.com/spec/v1
+oid sha256:d236a4f99915286a42b95df96391153d7fcb9f9bad6db72835b7f4eed287df89
+size 1053
