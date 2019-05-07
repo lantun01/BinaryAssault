@@ -15,6 +15,9 @@ public static class TransformEx
         transform.eulerAngles = rotacionV;
     }
 
+    ///<summary>
+    ///<para>Angulo entre el eje x positivo y la dirección del vector</para>
+    ///</summary>
     public static float Angulo(this Vector3 direction)
     {
         float sign = direction.y < 0 ? -1 : 1;
@@ -22,6 +25,10 @@ public static class TransformEx
         return angulo;
     }
 
+    
+    ///<summary>
+    ///<para>Mueve la transform en la dirección señalada con la velocidad speed</para>
+    ///</summary>
     public static void Mover(this Transform tranform, Vector3 direction, float speed)
     {
         tranform.position += direction * speed*Time.deltaTime;
