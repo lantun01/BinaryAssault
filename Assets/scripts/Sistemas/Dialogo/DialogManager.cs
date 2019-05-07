@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 
 public class DialogManager : MonoBehaviour
@@ -6,7 +7,7 @@ public class DialogManager : MonoBehaviour
     private Dialogo _dialogo;
     private int currentLine;
     private int maxLine;
-    private TextMeshPro tm;
+   [SerializeField] private TextMeshPro TextBox;
 
     public static DialogManager instance;
     public GameEvent endDialogue;
@@ -24,13 +25,12 @@ public class DialogManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        tm = GetComponent<TextMeshPro>();
-    }
 
-    public void StartDialogue(Dialogo dialogo)
+
+    public void StartDialogue(Dialogo dialogo, Vector3 position)
     {
+        TextBox.gameObject.SetActive(true);
+        TextBox.transform.position = position;
         dialogo.iniciado = true;
         startDialogue?.Raise();
         _dialogo = dialogo;
@@ -42,13 +42,13 @@ public class DialogManager : MonoBehaviour
 
     public void NextLine()
     {
-        if (currentLine==maxLine-1)
+        if (currentLine==maxLine)
         {
             EndDialogue();
         }
         else
         {
-            tm.text = _dialogo[currentLine];
+            TextBox.text = _dialogo[currentLine];
             currentLine++;
         }
     }
@@ -58,7 +58,11 @@ public class DialogManager : MonoBehaviour
         currentLine = 0;
         _dialogo.iniciado = false;
         endDialogue?.Raise();
+        TextBox.gameObject.SetActive(false);
+        
     }
+    
+   
     
     
 }
