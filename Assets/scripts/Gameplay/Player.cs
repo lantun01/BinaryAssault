@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Utils;
 
@@ -18,7 +19,7 @@ public class Player : Character, IUpdateable
     public float dashSpeed;
     public Animator animator;
     public Arma arma;
-    public LayerMask layermask;
+    [FormerlySerializedAs("layermask")] public LayerMask proyectilLayerMask;
     public TransformVariable transformValue;
     public CinemachineTargetGroup cineGroup;
     public GameEvent RecibirAtaque;
@@ -86,6 +87,9 @@ public class Player : Character, IUpdateable
         }
     }
 
+
+  
+
     internal void VoltearSprite(bool voltear)
     {
 
@@ -142,6 +146,7 @@ public class Player : Character, IUpdateable
         RotarArma();
         EscanearObjetivo();
         transform.Mover(joystick.Direction, 2);
+        
     }
 
     internal void RotarArma()
