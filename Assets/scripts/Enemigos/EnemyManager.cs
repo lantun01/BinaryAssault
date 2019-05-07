@@ -30,7 +30,10 @@ public class EnemyManager : MonoBehaviour
 
     public void RemoveEnemigo(Enemigo enemigo)
     {
+        if (enemigo)
+        {
         enemigos.Remove(enemigo);
+        }
     }
 
     public void StartEncounter()
