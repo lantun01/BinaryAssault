@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class InteractionCollider : MonoBehaviour
 {
@@ -22,7 +19,6 @@ public class InteractionCollider : MonoBehaviour
         player.interactuable = interactuable;
         player.SetAction(interactuable.Interaccion);
         player.botonAccion.sprite = interactuable.interaccionIcon;
-        print("hi");
     }
 
     private void OnTriggerExit2D(Collider2D other)

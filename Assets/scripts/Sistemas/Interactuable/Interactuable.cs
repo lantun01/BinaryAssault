@@ -12,6 +12,7 @@ public class Interactuable : MonoBehaviour
    
    [SerializeField] private UnityEvent interactuar;
    [SerializeField] private MyPlayerEvent interaccion;
+
    public Sprite interaccionIcon;
    
 
@@ -22,6 +23,6 @@ public class Interactuable : MonoBehaviour
 
    public void Interaccion(Player p)
    {
-      interaccion?.Invoke(p);
+      interaccion.Invoke(p);
    }
 }
