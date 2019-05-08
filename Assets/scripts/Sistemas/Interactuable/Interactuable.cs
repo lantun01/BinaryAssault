@@ -1,22 +1,27 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using  UnityEngine.Events;
 
+
+[System.Serializable]
+public class MyPlayerEvent: UnityEvent<Player>
+{
+   
+}
 public class Interactuable : MonoBehaviour
 {
-   [SerializeField]
-   private UnityEvent interactuar;
+   
+   [SerializeField] private UnityEvent interactuar;
+   [SerializeField] private MyPlayerEvent interaccion;
+   public Sprite interaccionIcon;
+   
 
    public void Interactuar()
    {
       interactuar?.Invoke();
    }
 
-   private void Update()
+   public void Interaccion(Player p)
    {
-      if(Input.GetKeyDown(KeyCode.A))
-         Interactuar();
+      interaccion?.Invoke(p);
    }
 }

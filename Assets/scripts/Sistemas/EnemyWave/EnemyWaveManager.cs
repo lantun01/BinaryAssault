@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -18,8 +19,12 @@ public class EnemyWaveManager : MonoBehaviour
     private void Awake()
     {
         cantidadWaves = waves.Count;
-        pooler = Pooler.instance;
         boxCollider = GetComponent<BoxCollider2D>();
+    }
+
+    private void Start()
+    {
+        pooler = Pooler.instance;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -30,6 +35,15 @@ public class EnemyWaveManager : MonoBehaviour
         SpawnNextWave();
         boxCollider.enabled = false;
         EnemyManager.instance.StartEncounter();
+        }
+    }
+
+    private void OnValidate()
+    {
+        if (!boxCollider)
+        {
+        boxCollider = GetComponent<BoxCollider2D>();
+        boxCollider.isTrigger = true;
         }
     }
 

@@ -33,15 +33,18 @@ public class Player : Character, IUpdateable
     private Image botonArma;
     [SerializeField]
     private float dashTime;
+    
     public FloatingJoystick joystick;
-
+    public Image botonAccion;
+    [SerializeField] private Sprite defaultActionSprite;
+    
     private List<ArmaData> armas = new List<ArmaData>();
     public ParticleSystem polvoCaminar;
     private ParticleSystem.EmissionModule polvoEmission;
     private ParticleSystem.EmissionModule dashEmission;
     private int armaActual;
     private int cantidadArmas;
-    private PlayerStateMachine stateMachine = new PlayerStateMachine();
+    public PlayerStateMachine stateMachine = new PlayerStateMachine();
     private Material material;
     private int hologramId, blendOutlineId; //Shaders prop
     private TrailRenderer trail;
@@ -51,6 +54,7 @@ public class Player : Character, IUpdateable
     private SpriteRenderer spriteRenderer;
     private delegate void AccionPostDash();
     private bool armado;
+    [HideInInspector] public Interactuable interactuable; //Elemento con el cual el player va a interactuar
 
 
     private void Awake()
@@ -83,12 +87,12 @@ public class Player : Character, IUpdateable
     {
         if (collision.GetComponent<ArmaDrop>())
         {
-            AgregarArma(collision.GetComponent<ArmaDrop>().Recoger());
+           // AgregarArma(collision.GetComponent<ArmaDrop>().Recoger());
         }
     }
 
 
-  
+    
 
     internal void VoltearSprite(bool voltear)
     {
@@ -171,7 +175,7 @@ public class Player : Character, IUpdateable
             animator.SetBool(hashDash, true);
             material.SetFloat(hologramId, 1);
             material.SetFloat(blendOutlineId, 1);
-            StartCoroutine(stateMachine.SetWait(dashTime));
+            StartCoroutine(stateMachine.SetWaitTime(dashTime));
         }
 
         void DashEnd()
@@ -289,5 +293,26 @@ public class Player : Character, IUpdateable
     public void Subscribir()
     {
         UpdateManager.instance.Subscribe(this);
+    }
+
+    public void SetAction(Action<Player> a)
+    {
+        this.stateMachine.SetAct(a);
+    }
+
+    public void SetPlayingState()
+    {
+        stateMachine.SetPlaying();
+        ResetActionButon();
+    }
+
+    public void SetWaitingState()
+    {
+        stateMachine.SetWait(false);
+    }
+
+    public void ResetActionButon()
+    {
+        botonAccion.sprite = defaultActionSprite;
     }
 }

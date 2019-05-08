@@ -10,6 +10,10 @@ public class PlayerStateMachine
     public Action<Player> act;
     private State currentState;
     public delegate void Resolver();
+
+    private Action endWaitAction;
+    
+    public delegate void PlayerAction(Player p);
    
 
     public void Inicializar()
@@ -24,7 +28,7 @@ public class PlayerStateMachine
         currentState.Act(player);
     }
 
-    public IEnumerator SetWait(float time)
+    public IEnumerator SetWaitTime(float time)
     {
         currentState = waiting;
         act = DoNothing;
@@ -37,7 +41,19 @@ public class PlayerStateMachine
         act = playing.Disparar;
     }
 
-    public IEnumerator SetWait(float time, Resolver PostWaitAction)
+    public void SetWait(bool doNothing = true)
+    {
+        currentState = waiting;
+        if (doNothing)
+            act = DoNothing;
+    }
+
+    public void SetAct(Action<Player> a)
+    {
+        act = a;
+    }
+
+    public IEnumerator SetWaitTime(float time, Action PostWaitAction)
     {
         currentState = waiting;
         act = DoNothing;
@@ -54,6 +70,11 @@ public class PlayerStateMachine
 
     public void DoNothing(Player player)
     {
+    }
 
+    public void SetPlaying()
+    {
+        act = playing.Disparar;
+        currentState = playing;
     }
 }

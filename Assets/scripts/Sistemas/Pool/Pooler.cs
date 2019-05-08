@@ -13,14 +13,27 @@ public class Pooler : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        if (instance== null)
+        {
+            instance = this;
+           
+        
+        }
+        else
+        {
+            Destroy(this);
+        }
+        
+        
+    }
+
+    private void Start()
+    {
         for (int i = 0; i < preloadedObjects.Count; i++)
         {
             CrearPool(preloadedObjects[i].pooleable, preloadedObjects[i].amount);
         }
     }
-
-    
 
     public void CrearPool(Pooleable pooleable, int cantidad)
     {

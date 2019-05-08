@@ -21,9 +21,11 @@ public class ArmaDrop : MonoBehaviour
     //    }
     //}
 
-    internal ArmaData Recoger()
+
+
+    public void RecogerArma(Player player)
     {
+        player.AgregarArma(data);
         Destroy(gameObject);
-        return data;
     }
 }
