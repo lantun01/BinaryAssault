@@ -9434,7 +9434,7 @@ GameObject:
   - component: {fileID: 5542269673972769712}
   - component: {fileID: 5478379156956530899}
   - component: {fileID: 6340307950707833233}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Interaction Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9465,7 +9465,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.16}
@@ -9493,6 +9493,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b5d4edc483312f418ccd44c10ef9117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 7477680493172056151}
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 8192
 --- !u!1 &7477680492341750631
 GameObject:
   m_ObjectHideFlags: 0
@@ -9683,7 +9687,7 @@ MonoBehaviour:
   dashSpeed: 7
   animator: {fileID: 7477680493172056147}
   arma: {fileID: 7477680494162539573}
-  layermask:
+  proyectilLayerMask:
     serializedVersion: 2
     m_Bits: 512
   transformValue: {fileID: 11400000, guid: 6b48f55650a14f14695b4fac6c02303a, type: 2}
@@ -9697,7 +9701,9 @@ MonoBehaviour:
   botonArma: {fileID: 0}
   dashTime: 0.1
   joystick: {fileID: 0}
+  botonAccion: {fileID: 0}
   polvoCaminar: {fileID: 861140769}
+  interactuable: {fileID: 0}
 --- !u!50 &7477680493172056146
 Rigidbody2D:
   serializedVersion: 4
