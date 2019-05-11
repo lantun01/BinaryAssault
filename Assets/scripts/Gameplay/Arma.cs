@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿using UnityEngine;
+using  Utils;
 
 public class Arma : MonoBehaviour
 {
@@ -16,6 +13,7 @@ public class Arma : MonoBehaviour
     private int dispararHash;
     private bool armado;
     private Animator animator;
+    private bool cooldown;
 
     private void Awake()
     {
@@ -76,9 +74,14 @@ public class Arma : MonoBehaviour
 
     internal void Disparar(Vector3 mirada)
     {
-
+        if (cooldown) return;
+        AnimarDisparar();
         data?.Disparar(transform, mirada);
+        StartCoroutine(Corroutines.Wait(data.fireRate,() => cooldown = true,()=>cooldown = false));
+
     }
+    
+    
 
     
 }
