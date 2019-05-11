@@ -21,9 +21,7 @@ public class Player : Character, IUpdateable
     public Arma arma;
     [FormerlySerializedAs("layermask")] public LayerMask proyectilLayerMask;
     public TransformVariable transformValue;
-    public CinemachineTargetGroup cineGroup;
     public GameEvent RecibirAtaque;
-    public GameEvent disparar;
     public FloatVariable saludRatio;
     public ParticleSystem dashTrail;
     public DashSkill dashSkill;
@@ -50,7 +48,7 @@ public class Player : Character, IUpdateable
     private TrailRenderer trail;
     private Enemigo objetivo;
     private Enemigo previousEnemy;
-    private CinemachineTargetGroup.Target target = new CinemachineTargetGroup.Target();
+    [SerializeField] private CameraControl cameraControl;
     private SpriteRenderer spriteRenderer;
     private delegate void AccionPostDash();
     private bool armado;
@@ -71,7 +69,7 @@ public class Player : Character, IUpdateable
         blendOutlineId = Shader.PropertyToID("_OperationBlend_Fade_1");
         trail = GetComponent<TrailRenderer>();
         transformValue.value = transform;
-        target.weight = 5;
+       // target.weight = 5;
         polvoEmission = polvoCaminar.emission;
         dashEmission = dashTrail.emission;
         Inicializar();
@@ -140,8 +138,6 @@ public class Player : Character, IUpdateable
             arma.Disparar(joystick.mirada);
 
         }
-
-        disparar?.Raise();
     }
 
     internal void Mover()
@@ -200,21 +196,20 @@ public class Player : Character, IUpdateable
             objetivo = EnemyManager.instance.GetNerbyEnemy(transform.position);
             if (objetivo && objetivo!=previousEnemy)
             {
-                target.weight = 5;
+               // target.weight = 5;
                 previousEnemy = objetivo;
                 CambiarObjetivo();
             }
             else
             {
-                target.weight = 0;
+                //target.weight = 0;
             }
         }
     }
 
     private void CambiarObjetivo()
     {
-        target.target = objetivo.transform;
-        cineGroup.m_Targets[1] = target;
+        cameraControl.SetTarget(objetivo);
     }
 
     private bool ObjetivoDerecha()
