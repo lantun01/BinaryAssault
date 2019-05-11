@@ -348,6 +348,8 @@ GameObject:
   - component: {fileID: 534669903}
   - component: {fileID: 534669906}
   - component: {fileID: 534669907}
+  - component: {fileID: 534669908}
+  - component: {fileID: 534669909}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -478,6 +480,49 @@ MonoBehaviour:
   m_CropFrameX: 0
   m_CropFrameY: 0
   m_StretchFill: 0
+--- !u!114 &534669908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534669902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 335fae4c9413b514bb47a5b0ddd1831d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetGroup: {fileID: 2029821847}
+  targetWeight: 5
+--- !u!114 &534669909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534669902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b3b201f17705134da651c99da8e6a8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Evento: {fileID: 11400000, guid: 705ae1d57a204f54582df480eb69c655, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 534669908}
+        m_MethodName: Reset
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &544379689
 GameObject:
   m_ObjectHideFlags: 0
@@ -772,7 +817,7 @@ MonoBehaviour:
     amount: 3
   - pooleable: {fileID: 8397214474685839638, guid: b6f0b28119d52d34a84c9f7ae8bd459b,
       type: 3}
-    amount: 2
+    amount: 3
 --- !u!1 &701635472
 GameObject:
   m_ObjectHideFlags: 0
@@ -880,6 +925,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  endWaveEvent: {fileID: 11400000, guid: 705ae1d57a204f54582df480eb69c655, type: 2}
 --- !u!61 &701635475
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1184,6 +1230,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  endWaveEvent: {fileID: 11400000, guid: 705ae1d57a204f54582df480eb69c655, type: 2}
 --- !u!4 &945469593
 Transform:
   m_ObjectHideFlags: 0
@@ -5095,6 +5142,11 @@ PrefabInstance:
       propertyPath: defaultActionSprite
       value: 
       objectReference: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 7477680493172056151, guid: 6c04f093d06552541afef818d39b7a0f,
+        type: 3}
+      propertyPath: cameraControl
+      value: 
+      objectReference: {fileID: 534669908}
     - target: {fileID: 7477680493172056149, guid: 6c04f093d06552541afef818d39b7a0f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5165,7 +5217,8 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1421191865}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 405797241, guid: 6c04f093d06552541afef818d39b7a0f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6c04f093d06552541afef818d39b7a0f, type: 3}
 --- !u!1 &7477680493172056150 stripped
 GameObject:
