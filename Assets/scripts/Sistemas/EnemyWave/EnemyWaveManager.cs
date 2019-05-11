@@ -11,6 +11,7 @@ public class EnemyWaveManager : MonoBehaviour
     public List<EnemyWave> waves;
     public UnityEvent startWave;
     public UnityEvent endWave;
+    public GameEvent endWaveEvent;
     private int cantidadWaves;
     private int currentWave = 0;
     private BoxCollider2D boxCollider;
@@ -52,6 +53,7 @@ public class EnemyWaveManager : MonoBehaviour
         if (currentWave>=cantidadWaves)
         {
             endWave?.Invoke();
+            endWaveEvent?.Raise();
             return;
         }
 
