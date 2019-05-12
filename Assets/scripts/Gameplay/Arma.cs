@@ -74,9 +74,9 @@ public class Arma : MonoBehaviour
 
     internal void Disparar(Vector3 mirada)
     {
-        if (cooldown) return;
+        if (cooldown || !data) return;
         AnimarDisparar();
-        data?.Disparar(transform, mirada);
+        data.Disparar(transform, mirada);
         StartCoroutine(Corroutines.Wait(data.fireRate,() => cooldown = true,()=>cooldown = false));
 
     }
