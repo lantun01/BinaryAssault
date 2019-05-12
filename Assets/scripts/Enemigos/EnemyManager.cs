@@ -8,6 +8,7 @@ public class EnemyManager : MonoBehaviour
     public Transform targetCircle;
     private Enemigo target;
     public List<Enemigo> enemigos;
+    private bool enEncuentro;
 
     private void Awake()
     {
@@ -39,11 +40,12 @@ public class EnemyManager : MonoBehaviour
     public void StartEncounter()
     {
         targetCircle.gameObject.SetActive(true);
+        enEncuentro = true;
     }
 
     public Enemigo GetNerbyEnemy(Vector3 pos)
     {
-        if (enemigos.Count!=0)
+        if (enEncuentro)
         {
             int indice = 0;
             float min = (enemigos[0].transform.position - pos).sqrMagnitude;
@@ -60,11 +62,13 @@ public class EnemyManager : MonoBehaviour
             targetCircle.transform.position = target.TargetPos();
             return target;
         }
-        else
-        {
 
-            targetCircle.gameObject.SetActive(false);
-            return null;
-        }
+        return null;
+    }
+
+    public void EndEncounter()
+    {
+        enEncuentro = false;
+        targetCircle.gameObject.SetActive(false);
     }
 }
