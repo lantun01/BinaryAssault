@@ -6,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName ="ScriptableObjects/Evento")]
 public class GameEvent : ScriptableObject
 {
-    private List<EventListener> listeners;
+    private List<EventListener> listeners = new List<EventListener>();
 
     public void Raise()
     {
