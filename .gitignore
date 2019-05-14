@@ -68,3 +68,5 @@ Assets/Plugins/Editor.meta
 *.txt
 Assets/Unity-Logs-Viewer/
 .idea/
+Assets/Unity-Logs-Viewer.meta
+Assets/StreamingAssets/build_info.txt.meta
