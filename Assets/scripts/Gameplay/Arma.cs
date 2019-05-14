@@ -9,7 +9,7 @@ public class Arma : MonoBehaviour
     public Proyectil proyectil;
     [SerializeField]
     private LineRenderer mira;
-    private ArmaData data;
+   [SerializeField] private ArmaData data;
     private int dispararHash;
     private bool armado;
     private Animator animator;
@@ -20,6 +20,11 @@ public class Arma : MonoBehaviour
         animator = GetComponent<Animator>();
         mira = GetComponent<LineRenderer>();
         dispararHash = Animator.StringToHash("disparar");
+        
+        if (data)
+        {
+            SetArma(data);
+        }
     }
 
     public void AnimarDisparar()
@@ -78,7 +83,6 @@ public class Arma : MonoBehaviour
         AnimarDisparar();
         data.Disparar(transform, mirada);
         StartCoroutine(Corroutines.Wait(data.fireRate,() => cooldown = true,()=>cooldown = false));
-
     }
     
     
