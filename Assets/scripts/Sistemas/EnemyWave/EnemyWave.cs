@@ -27,7 +27,7 @@ public class EnemyWave: IPooleableCaller
         {
           currentEnemy = pool.SpawnObjeto(enemigos[i].enemigo);
           currentEnemy.Reiniciar();
-            currentEnemy.Subscribir(this);
+          currentEnemy.Subscribir(this);
           currentEnemy.transform.position = enemigos[i].spawnPosition;
         }
     }

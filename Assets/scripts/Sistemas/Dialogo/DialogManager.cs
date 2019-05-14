@@ -1,17 +1,21 @@
 ﻿using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class DialogManager : MonoBehaviour
 {
     private Dialogo _dialogo;
     private int currentLine;
     private int maxLine;
-   [SerializeField] private TextMeshPro TextBox;
+   [FormerlySerializedAs("TextBox")] [SerializeField] private TextMeshProUGUI textMesh;
+   [SerializeField] private GameObject textBox;
 
     public static DialogManager instance;
     public GameEvent endDialogue;
     public GameEvent startDialogue;
+    public RectTransform dialogueBox;
+    private Camera camera;
     
     private void Awake()
     {
@@ -26,16 +30,22 @@ public class DialogManager : MonoBehaviour
     }
 
 
+    private void Start()
+    {
+        camera = Camera.main;
+    }
+
 
     public void StartDialogue(Dialogo dialogo, Vector3 position)
     {
-        TextBox.gameObject.SetActive(true);
-        TextBox.transform.position = position;
+        textBox.gameObject.SetActive(true);
         dialogo.iniciado = true;
         startDialogue?.Raise();
         _dialogo = dialogo;
         currentLine = 0;
         maxLine = dialogo.dialogos.Length;
+        Vector2 screenPos = camera.WorldToScreenPoint(position);
+        dialogueBox.position = screenPos;
         NextLine();
         
     }
@@ -48,7 +58,7 @@ public class DialogManager : MonoBehaviour
         }
         else
         {
-            TextBox.text = _dialogo[currentLine];
+            textMesh.text = _dialogo[currentLine];
             currentLine++;
         }
     }
@@ -58,7 +68,7 @@ public class DialogManager : MonoBehaviour
         currentLine = 0;
         _dialogo.iniciado = false;
         endDialogue?.Raise();
-        TextBox.gameObject.SetActive(false);
+        textBox.gameObject.SetActive(false);
         
     }
     
