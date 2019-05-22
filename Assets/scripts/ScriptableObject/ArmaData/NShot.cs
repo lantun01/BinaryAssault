@@ -10,7 +10,7 @@ public class NShot : ArmaData
     public float angulo;
     public float separacion;
 
-    public override void Disparar(Transform arma, Vector3 direccion)
+    public override void Disparar(Transform arma, Vector3 direccion, float damage)
     {
         float currentAngle = 0;
         Vector3 desfase = new Vector3(0,0,0);
@@ -28,6 +28,7 @@ public class NShot : ArmaData
             disparo.transform.position = arma.position + currentDesfase;
             disparo.posInicial = arma.position + currentDesfase;
             disparo.angulo = anguloDireccion + currentAngle;
+            disparo.setDamage(damage);
 
 
             if (i%2 ==0)

@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: PreviewMaterial
-  m_Shader: {fileID: 4800000, guid: 607819a4b162ee24982098a0eab82c70, type: 3}
+  m_Shader: {fileID: 4800000, guid: 3e377527bfd4de34b94d7c7a3f2545f8, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -96,11 +96,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NewTex_1:
-        m_Texture: {fileID: 2800000, guid: 2e8b9f4a77b10c64493d2cd31f28c6db, type: 3}
+        m_Texture: {fileID: 2800000, guid: 7438963bd2fe22a49ae8933ba2c6f2f2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NewTex_2:
-        m_Texture: {fileID: 2800000, guid: 2217adebf73932d4abe5314165938fae, type: 3}
+        m_Texture: {fileID: 2800000, guid: 138ee2d27c705ee448e702b772fc0ef6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NewTex_3:
@@ -168,6 +168,11 @@ Material:
     - AnimatedMouvementUV_Speed_1: 0.59
     - AnimatedMouvementUV_X_1: 0.269
     - AnimatedMouvementUV_Y_1: 0.011
+    - AnimatedOffsetUV_Speed_1: 1
+    - AnimatedOffsetUV_X_1: 0.1
+    - AnimatedOffsetUV_Y_1: -0.125
+    - AnimatedOffsetUV_ZoomX_1: 1
+    - AnimatedOffsetUV_ZoomY_1: 1
     - AnimatedPingPongOffsetUV_1_OffsetX_1: 0
     - AnimatedPingPongOffsetUV_1_OffsetY_1: 0
     - AnimatedPingPongOffsetUV_1_Speed_1: 0.1
@@ -211,6 +216,7 @@ Material:
     - OffsetUV_Y_1: 0
     - OffsetUV_ZoomX_1: 1.371
     - OffsetUV_ZoomY_1: 1
+    - PixelSnap: 0
     - PixelUV_Size_1: 32
     - PixelXYUV_SizeX_1: 16.421
     - PixelXYUV_SizeY_1: 13.7
@@ -267,6 +273,7 @@ Material:
     - _CircleFade_PosY_2: 0.5
     - _CircleFade_Size_1: 0.3
     - _CircleFade_Size_2: 0.3
+    - _ClippingRight_Value_1: 1
     - _ColorGradients_Fade_: 0
     - _ColorGradients_Fade_1: 1
     - _ColorGradients_Fade_2: 1
@@ -918,6 +925,7 @@ Material:
     - _Mask2uv_Fade_27: 1
     - _Mask2uv_Fade_29: 1
     - _Mask2uv_Fade_31: 1
+    - _MaskAlpha_Fade_1: 0
     - _MaskChannel_Fade_1: 1
     - _MaskRGBA_Fade_1: 0
     - _MaskRGBA_Fade_2: 0
@@ -929,7 +937,7 @@ Material:
     - _MotionBlurFast_Distance_1: 1
     - _OcclusionStrength: 1
     - _OperationBlendMask_Fade_1: 1
-    - _OperationBlend_Fade_1: 0
+    - _OperationBlend_Fade_1: 1
     - _OperationBlend_Fade_2: 0.764
     - _OutlineEmpty_Size_1: 5.514
     - _Outline_Size_1: 1
@@ -1028,4 +1036,4 @@ Material:
     - _Outline_Color_1: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
     - _ShadowLight_Color_1: {r: 0, g: 0.7, b: 1, a: 1}
-    - _TintRGBA_Color_1: {r: 1, g: 0, b: 0, a: 0.528}
+    - _TintRGBA_Color_1: {r: 0.149055, g: 1, b: 0, a: 1}

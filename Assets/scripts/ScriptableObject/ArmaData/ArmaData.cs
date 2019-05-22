@@ -12,6 +12,7 @@ public abstract class ArmaData : ScriptableObject
     [Tooltip("Disparos por segundo")]
     public float fireRate;
     public bool tieneMira;
-    public abstract void Disparar(Transform arma, Vector3 direccion);
+    public AudioClip audio;
+    public abstract void Disparar(Transform arma, Vector3 direccion, float damage);
     
 }

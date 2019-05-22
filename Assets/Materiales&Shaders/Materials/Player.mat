@@ -100,7 +100,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _Hologram_Speed_1: 4
+    - _Hologram_Speed_1: 1.7
     - _Hologram_Value_1: 0
     - _InnerGlowHQ_Intensity_1: 0
     - _InnerGlowHQ_Size_1: 3
@@ -109,7 +109,7 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _OperationBlend_Fade_1: 0
-    - _OutlineEmpty_Size_1: 7.67
+    - _OutlineEmpty_Size_1: 3.29
     - _Outline_HDR_1: 1
     - _Outline_Size_1: 2
     - _Parallax: 0.02

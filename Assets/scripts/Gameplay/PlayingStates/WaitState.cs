@@ -6,6 +6,7 @@ public class WaitState : State
 {
     public override void Act(Player player)
     {
-        
     }
+    
+    
 }

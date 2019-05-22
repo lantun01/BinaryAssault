@@ -7,8 +7,13 @@ public class Proyectil : Pooleable, IUpdateable
     public Vector3 posInicial;
     public float angulo;
     private PatronDisparo patron;
+    private float damage;
 
 
+    public void setDamage(float damage)
+    {
+        this.damage = damage;
+    }
 
     private void Start()
     {

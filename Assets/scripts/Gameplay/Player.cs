@@ -6,6 +6,8 @@ using Cinemachine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Utils;
+using Random = UnityEngine.Random;
+
 
 public class Player : Character, IUpdateable
 {
@@ -25,6 +27,7 @@ public class Player : Character, IUpdateable
     public FloatVariable saludRatio;
     public ParticleSystem dashTrail;
     public DashSkill dashSkill;
+    public EmiterController speedUpParticles,damageUpParticles;
     public bool enCombate;
 
     [SerializeField]
@@ -42,7 +45,7 @@ public class Player : Character, IUpdateable
     private ParticleSystem.EmissionModule dashEmission;
     private int armaActual;
     private int cantidadArmas;
-    public PlayerStateMachine stateMachine = new PlayerStateMachine();
+    public PlayerStateMachine stateMachine;
     private Material material;
     private int hologramId, blendOutlineId; //Shaders prop
     private TrailRenderer trail;
@@ -52,6 +55,7 @@ public class Player : Character, IUpdateable
     private SpriteRenderer spriteRenderer;
     private delegate void AccionPostDash();
     private bool armado;
+    private float damageModifier, speedModifier;
     [HideInInspector] public Interactuable interactuable; //Elemento con el cual el player va a interactuar
 
 
@@ -60,6 +64,7 @@ public class Player : Character, IUpdateable
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        stateMachine = new PlayerStateMachine(this);
         stateMachine.Inicializar();
         hashCaminar = Animator.StringToHash("caminando");
         hashMelee = Animator.StringToHash("melee");
@@ -145,7 +150,7 @@ public class Player : Character, IUpdateable
         //rb.Mover(joystick.Direction, velocidad);
         RotarArma();
         EscanearObjetivo();
-        transform.Mover(joystick.Direction, 2);
+        transform.Mover(joystick.Direction, velocidad+speedModifier);
         
     }
 
@@ -309,5 +314,52 @@ public class Player : Character, IUpdateable
     public void ResetActionButon()
     {
         botonAccion.sprite = defaultActionSprite;
+    }
+
+    public void PowerUpDamage(float damage, float time)
+    {
+        damageUpParticles.Play();
+        print("Ataquee");
+        StartCoroutine(Corroutines.Wait(time, () => damageModifier += damage,
+            () => damageModifier -= damage));
+    }
+
+    public void PowerUpSpeed(float speed, float time)
+    {
+        StartCoroutine(Corroutines.Wait(time, () => material.SetFloat(blendOutlineId, 1f),
+            () => material.SetFloat(blendOutlineId, 0f)));
+        StartCoroutine(Corroutines.Wait(time, () => speedModifier += speed, () => this.speedModifier -= speed));
+        speedUpParticles.Play();
+    }
+
+    public void SetInvulneravility(bool value)
+    {
+        invulnerable = value;
+    }
+
+    public void SetInvulneravility(bool value, float time)
+    {
+        StartCoroutine(Corroutines.Wait(time, () => SetInvulneravility(value), () => SetInvulneravility(!value)));
+    }
+
+
+    public void upgradeSkill()
+    {
+        int choice = Random.Range(0, 4);
+        switch (choice)
+        {
+            case (0):
+                PowerUpDamage(5,5);
+                break;
+            case(1):
+                PowerUpSpeed(2.5f,5);
+                break;
+            case (2):
+                saludActual += 5;
+                break;
+            case(3):
+                SetInvulneravility(true,3);
+                break;
+        }
     }
 }

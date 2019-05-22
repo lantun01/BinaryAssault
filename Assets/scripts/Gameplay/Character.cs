@@ -14,8 +14,14 @@ public class Character : MonoBehaviour
     public Vector2 mirada;
     public Vector3 dirMov;
     public UnityEvent OnMorir;
-    protected int saludActual { get=>_saludActual; set
+    [HideInInspector] protected bool invulnerable;
+    public int saludActual { get=>_saludActual; set
         {
+            if (value<_saludActual && invulnerable)
+            {
+                return;
+            }
+           
             if (value<0)
             {
                 _saludActual = 0;

@@ -13,6 +13,12 @@ public class ArmaDrop : MonoBehaviour
     {
         Collider2D coll = GetComponent<BoxCollider2D>();
         coll.isTrigger = true;
+
+        if (data)
+        {
+        SpriteRenderer sprite = GetComponent<SpriteRenderer>();
+        sprite.sprite = data.sprite;
+        }
     }
 
     public void RecogerArma(Player player)

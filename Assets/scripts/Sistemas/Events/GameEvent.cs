@@ -12,7 +12,7 @@ public class GameEvent : ScriptableObject
     {
         for (int i = 0; i < listeners.Count; i++)
         {
-            listeners[i].OnEventRaised();
+            listeners[i]?.OnEventRaised();
         }
     }
     internal void RegisterListener(EventListener eventListener)

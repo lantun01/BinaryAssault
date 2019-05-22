@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using  Utils;
 
+[RequireComponent(typeof(AudioSource))]
 public class Arma : MonoBehaviour
 {
     public SpriteRenderer sprite;
@@ -14,9 +15,11 @@ public class Arma : MonoBehaviour
     private bool armado;
     private Animator animator;
     private bool cooldown;
+    private AudioSource _audioSource;
 
     private void Awake()
     {
+        _audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         mira = GetComponent<LineRenderer>();
         dispararHash = Animator.StringToHash("disparar");
@@ -66,6 +69,7 @@ public class Arma : MonoBehaviour
         data = armaData;
         sprite.sprite = data.sprite;
         proyectil = data.proyectil;
+        _audioSource.clip = armaData.audio;
     }
 
     public void ActualizarMira(Vector3 posicion)
@@ -77,15 +81,18 @@ public class Arma : MonoBehaviour
         }
     }
 
-    internal void Disparar(Vector3 mirada)
+    internal void Disparar(Vector3 mirada, float damageModifier)
     {
         if (cooldown || !data) return;
         AnimarDisparar();
-        data.Disparar(transform, mirada);
+        _audioSource.Play();
+        float damage = data.damage + damageModifier;
+        data.Disparar(transform, mirada, damage );
         StartCoroutine(Corroutines.Wait(data.fireRate,() => cooldown = true,()=>cooldown = false));
     }
-    
-    
 
-    
+    internal void Disparar(Vector3 mirada)
+    {
+        Disparar(mirada,0);
+    }
 }

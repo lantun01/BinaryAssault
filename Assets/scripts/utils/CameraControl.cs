@@ -35,4 +35,9 @@ public class CameraControl : MonoBehaviour
    {
       DOTween.To(() => vc.m_Lens.OrthographicSize, x => vc.m_Lens.OrthographicSize= x, 2.73f, 0.3f);
    }
+
+   public void Zoom(float value)
+   {
+      DOTween.To(() => vc.m_Lens.OrthographicSize, x => vc.m_Lens.OrthographicSize = x, value, 0.3f);
+   }
 }

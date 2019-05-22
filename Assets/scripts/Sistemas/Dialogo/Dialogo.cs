@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Serialization;
 using static DialogManager;
 
 public class Dialogo : MonoBehaviour
@@ -9,14 +12,36 @@ public class Dialogo : MonoBehaviour
 
    [HideInInspector] public bool iniciado;
    List<Dialogo> _dialogos = new List<Dialogo>();
-   
+   public UnityEvent startDialogue;
+   public UnityEvent endDialog;
+  
+
+
+
+
    public void Iniciar()
    {
+       
+      //Subscribir listener a dialogo
+
       if (!iniciado)
-         instance.StartDialogue(this , transform.position + Vector3.up);
-      else
-         instance.NextLine();
+      {
+          startDialogue?.Invoke();
+          instance.endDialogAction += EndDialog;
+          instance.StartDialogue(this, transform.position + Vector3.up);
+      }
+   else
+   instance.NextDialog();
+   }
+
+   public void EndDialog()
+   {
+       endDialog?.Invoke();
    }
 
    public string this[int index] => dialogos[index];
+
+  
+
+ 
 }

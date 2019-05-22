@@ -13,7 +13,7 @@ public class TripleShot : ArmaData
     public float angulo;
     public float separacion;
 
-    public override void Disparar(Transform arma, Vector3 direccion)
+    public override void Disparar(Transform arma, Vector3 direccion,float damage)
     {
         Vector3 desfase = new Vector3(0, separacion,0);
 
@@ -22,18 +22,21 @@ public class TripleShot : ArmaData
         disparo.transform.position = arma.position;
         disparo.posInicial = arma.position;
         disparo.angulo = direccion.Angulo();
+        disparo.setDamage(damage);
 
         Proyectil p2 = (Proyectil)Pooler.instance.SpawnObjeto(proyectil2);
         p2.SetPatron(patron2);
         p2.transform.position = arma.position + desfase;
         p2.posInicial = arma.position+desfase.RotarPunto(direccion.Angulo());
         p2.angulo = direccion.Angulo() + angulo;
+        disparo.setDamage(damage);
 
         p2 = (Proyectil)Pooler.instance.SpawnObjeto(proyectil3);
         p2.SetPatron(patron3);
         p2.transform.position = arma.position - desfase;
         p2.posInicial = arma.position-desfase;
         p2.angulo = direccion.Angulo() - angulo;
+        disparo.setDamage(damage);
 
     }
 

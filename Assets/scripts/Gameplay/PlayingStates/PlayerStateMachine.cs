@@ -9,9 +9,16 @@ public class PlayerStateMachine
     private State currentState;
     public delegate void Resolver();
 
+    private Player player;
+
     private Action endWaitAction;
     
     public delegate void PlayerAction(Player p);
+
+    public PlayerStateMachine(Player p)
+    {
+        player = p;
+    }
    
 
     public void Inicializar()
@@ -28,6 +35,7 @@ public class PlayerStateMachine
 
     public IEnumerator SetWaitTime(float time)
     {
+        player.animator.SetBool(player.hashCaminar,false);
         currentState = waiting;
         act = DoNothing;
 
@@ -41,6 +49,7 @@ public class PlayerStateMachine
 
     public void SetWait(bool doNothing = true)
     {
+        player.animator.SetBool(player.hashCaminar,false);
         currentState = waiting;
         if (doNothing)
             act = DoNothing;
@@ -74,5 +83,10 @@ public class PlayerStateMachine
     {
         act = playing.Disparar;
         currentState = playing;
+    }
+
+    public void SetTexting()
+    {
+        
     }
 }
