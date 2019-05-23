@@ -7,7 +7,6 @@ public class Arma : MonoBehaviour
     public SpriteRenderer sprite;
     public Vector3 posicionDerecha;
     public Vector3 posicionIzquierda;
-    public Proyectil proyectil;
     [SerializeField]
     private LineRenderer mira;
    [SerializeField] private ArmaData data;
@@ -22,17 +21,21 @@ public class Arma : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         mira = GetComponent<LineRenderer>();
-        dispararHash = Animator.StringToHash("disparar");
+        dispararHash = animator? 0: Animator.StringToHash("disparar");
         
         if (data)
         {
             SetArma(data);
         }
     }
+    
 
     public void AnimarDisparar()
     {
+        if (animator!=null)
+        {
         animator.SetTrigger(dispararHash);
+        }
     }
 
     public void VolvearSprite(bool value)
@@ -68,7 +71,6 @@ public class Arma : MonoBehaviour
     {
         data = armaData;
         sprite.sprite = data.sprite;
-        proyectil = data.proyectil;
         _audioSource.clip = armaData.audio;
     }
 

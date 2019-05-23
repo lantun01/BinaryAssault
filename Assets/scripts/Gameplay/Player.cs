@@ -49,7 +49,7 @@ public class Player : Character, IUpdateable
     private Material material;
     private int hologramId, blendOutlineId; //Shaders prop
     private TrailRenderer trail;
-    private Enemigo objetivo;
+    [HideInInspector] public Enemigo objetivo;
     private Enemigo previousEnemy;
     [SerializeField] private CameraControl cameraControl;
     private SpriteRenderer spriteRenderer;
@@ -57,6 +57,7 @@ public class Player : Character, IUpdateable
     private bool armado;
     private float damageModifier, speedModifier;
     [HideInInspector] public Interactuable interactuable; //Elemento con el cual el player va a interactuar
+    [SerializeField] private DroneTest drone;
 
 
     private void Awake()
@@ -78,6 +79,7 @@ public class Player : Character, IUpdateable
         polvoEmission = polvoCaminar.emission;
         dashEmission = dashTrail.emission;
         Inicializar();
+        drone.Inicializar(this);
     }
 
     private void Start()
@@ -199,22 +201,18 @@ public class Player : Character, IUpdateable
         if (EnemyManager.instance)
         {
             objetivo = EnemyManager.instance.GetNerbyEnemy(transform.position);
-            if (objetivo && objetivo!=previousEnemy)
-            {
-               // target.weight = 5;
-                previousEnemy = objetivo;
-                CambiarObjetivo();
-            }
-            else
-            {
-                //target.weight = 0;
-            }
+            if (!objetivo || objetivo == previousEnemy) return;
+            previousEnemy = objetivo;
+            CambiarObjetivo();
+
         }
     }
 
     private void CambiarObjetivo()
     {
         cameraControl.SetTarget(objetivo);
+        drone.SetTarget(objetivo.transform);
+        drone.enCombate = true;
     }
 
     private bool ObjetivoDerecha()
@@ -277,12 +275,15 @@ public class Player : Character, IUpdateable
     {
         enCombate = true;
         arma.ActivarMira();
+        drone.enCombate = true;
     }
 
     public void AbandonarCombate()
     {
         enCombate = false;
         arma.DesactivarMira();
+        drone.SetTarget(transform);
+        drone.enCombate = false;
     }
 
     public void CustomUpdate()
@@ -361,5 +362,10 @@ public class Player : Character, IUpdateable
                 SetInvulneravility(true,3);
                 break;
         }
+    }
+
+    public void DeployDrone()
+    {
+        drone.Deploy();
     }
 }
