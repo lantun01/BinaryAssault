@@ -40,7 +40,7 @@ public class Arma : MonoBehaviour
 
     public void VolvearSprite(bool value)
     {
-        sprite.flipY = value;
+//        sprite.flipY = value;
         if (value)
         {
             transform.localPosition = posicionIzquierda;
