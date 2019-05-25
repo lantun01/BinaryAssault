@@ -413,7 +413,7 @@ MonoBehaviour:
   m_text: 99
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 700e08d0e6cae724bb36de69f343e2f4, type: 2}
-  m_sharedMaterial: {fileID: 21163593525120986, guid: 700e08d0e6cae724bb36de69f343e2f4,
+  m_sharedMaterial: {fileID: 21801162960086548, guid: 700e08d0e6cae724bb36de69f343e2f4,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -785,7 +785,7 @@ MonoBehaviour:
   m_text: SNES CONTROLLER
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 700e08d0e6cae724bb36de69f343e2f4, type: 2}
-  m_sharedMaterial: {fileID: 21163593525120986, guid: 700e08d0e6cae724bb36de69f343e2f4,
+  m_sharedMaterial: {fileID: 21801162960086548, guid: 700e08d0e6cae724bb36de69f343e2f4,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -5345,7 +5345,7 @@ MonoBehaviour:
   m_text: A good old friend
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 700e08d0e6cae724bb36de69f343e2f4, type: 2}
-  m_sharedMaterial: {fileID: 21163593525120986, guid: 700e08d0e6cae724bb36de69f343e2f4,
+  m_sharedMaterial: {fileID: 21801162960086548, guid: 700e08d0e6cae724bb36de69f343e2f4,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -9037,6 +9037,17 @@ PrefabInstance:
     - target: {fileID: 5017812810495793277, guid: 18dc0dc3ac147ef42859c3c5e451a6a4,
         type: 3}
       propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017812810495793277, guid: 18dc0dc3ac147ef42859c3c5e451a6a4,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 700e08d0e6cae724bb36de69f343e2f4,
+        type: 2}
+    - target: {fileID: 5017812810495793277, guid: 18dc0dc3ac147ef42859c3c5e451a6a4,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5017812810495793273, guid: 18dc0dc3ac147ef42859c3c5e451a6a4,
