@@ -1,6 +1,8 @@
 ﻿
 using UnityEngine;
 
+
+[RequireComponent(typeof(BoxCollider2D))]
 public class Proyectil : Pooleable, IUpdateable
 {
     private float time;
@@ -13,6 +15,12 @@ public class Proyectil : Pooleable, IUpdateable
     public void setDamage(float damage)
     {
         this.damage = damage;
+    }
+
+    public void Disparar(float damage, Vector3 direccion)
+    {
+        this.damage = damage;
+        transform.Rotar(direccion);
     }
 
     private void Start()

@@ -24,6 +24,7 @@ public class ArmaDrop : MonoBehaviour
     public void RecogerArma(Player player)
     {
         player.AgregarArma(data);
+        ItemPanel.instance.Show(data);
         Destroy(gameObject);
     }
 }

@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            DOTween.defaultAutoPlay = AutoPlay.AutoPlayTweeners;
         }
         else
         {

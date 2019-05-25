@@ -20,14 +20,27 @@ public class DroneTest : MonoBehaviour, IUpdateable
     [SerializeField] private float lifeSpan = 5;
     [SerializeField] private float timeCounter;
     private bool deployed;
+   [SerializeField] private Animator _animator;
+   private int morirTriggerHash;
 
+
+
+#if UNITY_EDITOR
+
+   private void OnValidate()
+   {
+      _animator = GetComponent<Animator>();
+   }
+
+#endif
    public void Inicializar(Player p)
    {
       master = p;
    }
    
    private void Start()
-   {     
+   {
+      morirTriggerHash = Animator.StringToHash("morir");
      radio = Mathf.Sqrt(sqrRadio);
    }
    private void SimpleFollow()
@@ -76,7 +89,17 @@ public class DroneTest : MonoBehaviour, IUpdateable
       orbitando = false;
       timeCounter = 0;
       transform.position = master.transform.position+Vector3.right;
-      target = master.objetivo? master.objetivo.transform : master.transform;
+      
+      if (master.objetivo)
+      {
+         target = master.objetivo.transform;
+         enCombate = true;
+      }
+      else
+      {
+         target = master.transform;
+      }
+      
       gameObject.SetActive(true);
       Subscribir();
    }
@@ -106,7 +129,7 @@ public class DroneTest : MonoBehaviour, IUpdateable
    {
       deployed = false;
       UpdateManager.instance.RetirarElemento(this);
-      gameObject.SetActive(false);
+      _animator.SetTrigger(morirTriggerHash);
    }
 
    public void SetTarget(Transform target)
@@ -118,5 +141,12 @@ public class DroneTest : MonoBehaviour, IUpdateable
    public void Subscribir()
    {
       UpdateManager.instance.Subscribe(this);
+   }
+
+   
+   //Este método es llamado desde la animación morir
+   public void Deshabilitar()
+   {
+      gameObject.SetActive(false);
    }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 using  Utils;
 
 [RequireComponent(typeof(AudioSource))]
@@ -9,19 +10,27 @@ public class Arma : MonoBehaviour
     public Vector3 posicionIzquierda;
     [SerializeField]
     private LineRenderer mira;
+
+    [Header("Parámetros animación de disparo")]
+    [SerializeField] private float animDuration,animElasticity;
+    [SerializeField] private int animVibrato;
+    [SerializeField] private Vector3 animationScale;
+
+    
    [SerializeField] private ArmaData data;
     private int dispararHash;
     private bool armado;
     private Animator animator;
     private bool cooldown;
     private AudioSource _audioSource;
+    
 
     private void Awake()
     {
         _audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         mira = GetComponent<LineRenderer>();
-        dispararHash = animator? 0: Animator.StringToHash("disparar");
+        dispararHash = animator?  Animator.StringToHash("disparar"):-1;
         
         if (data)
         {
@@ -32,18 +41,21 @@ public class Arma : MonoBehaviour
 
     public void AnimarDisparar()
     {
-        if (animator!=null)
-        {
-        animator.SetTrigger(dispararHash);
-        }
+//        if (dispararHash!=-1)
+//        {
+//        animator.SetTrigger(dispararHash);
+//        }
+
+        transform.DOPunchScale(animationScale, animDuration, animVibrato, animElasticity);
     }
 
     public void VolvearSprite(bool value)
     {
-//        sprite.flipY = value;
+        sprite.flipY = value;
         if (value)
         {
             transform.localPosition = posicionIzquierda;
+
         }
         else
         {

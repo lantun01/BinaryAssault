@@ -23,6 +23,7 @@ public class TripleShot : ArmaData
         disparo.posInicial = arma.position;
         disparo.angulo = direccion.Angulo();
         disparo.setDamage(damage);
+        disparo.Disparar(damage,direccion);
 
         Proyectil p2 = (Proyectil)Pooler.instance.SpawnObjeto(proyectil2);
         p2.SetPatron(patron2);
@@ -30,13 +31,14 @@ public class TripleShot : ArmaData
         p2.posInicial = arma.position+desfase.RotarPunto(direccion.Angulo());
         p2.angulo = direccion.Angulo() + angulo;
         disparo.setDamage(damage);
+        p2.Disparar(damage,direccion);
 
         p2 = (Proyectil)Pooler.instance.SpawnObjeto(proyectil3);
         p2.SetPatron(patron3);
         p2.transform.position = arma.position - desfase;
         p2.posInicial = arma.position-desfase;
         p2.angulo = direccion.Angulo() - angulo;
-        disparo.setDamage(damage);
+        p2.Disparar(damage,direccion);
 
     }
 

@@ -13,5 +13,6 @@ public class SingleShotData : ArmaData
         disparo.posInicial = arma.position;
         disparo.angulo = direccion.Angulo();
         disparo.setDamage(damage);
+        disparo.Disparar(damage,direccion);
     }
 }

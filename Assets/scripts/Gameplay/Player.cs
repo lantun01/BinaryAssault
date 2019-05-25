@@ -39,7 +39,8 @@ public class Player : Character, IUpdateable
     public Image botonAccion;
     [SerializeField] private Sprite defaultActionSprite;
     
-    private List<ArmaData> armas = new List<ArmaData>();
+    private  List<ArmaInventario> _armas = new List<ArmaInventario>();
+    private ArmaInventario armaEquipada;
     public ParticleSystem polvoCaminar;
     private ParticleSystem.EmissionModule polvoEmission;
     private ParticleSystem.EmissionModule dashEmission;
@@ -58,6 +59,7 @@ public class Player : Character, IUpdateable
     private float damageModifier, speedModifier;
     [HideInInspector] public Interactuable interactuable; //Elemento con el cual el player va a interactuar
     [SerializeField] private DroneTest drone;
+    [SerializeField] private GameObject forceShield;
 
 
     private void Awake()
@@ -136,6 +138,15 @@ public class Player : Character, IUpdateable
 
     internal void Disparar()
     {
+        
+        
+        if (armaEquipada==null || !armaEquipada.TieneMunicion())
+        {
+            return;
+        }
+
+        armaEquipada.municion--;
+        
         if (objetivo)
         {
             arma.Disparar((objetivo.transform.position-arma.transform.position).normalized);
@@ -143,7 +154,6 @@ public class Player : Character, IUpdateable
         else
         {
             arma.Disparar(joystick.mirada);
-
         }
     }
 
@@ -224,8 +234,9 @@ public class Player : Character, IUpdateable
     {
         cantidadArmas++;
         armaActual = cantidadArmas-1;
-        armas.Add(armaData);
-        CambiarArma(armaData);
+        ArmaInventario newArma = new ArmaInventario(armaData);
+        _armas.Add(newArma);
+        CambiarArma(newArma);
     }
 
     public void SiguienteArma()
@@ -241,15 +252,16 @@ public class Player : Character, IUpdateable
 
         if (cantidadArmas>0)
         {
-            CambiarArma(armas[armaActual]);
+            CambiarArma(_armas[armaActual]);
         }
 
     }
 
-    internal void CambiarArma(ArmaData data)
+    internal void CambiarArma(ArmaInventario arma)
     {
-        arma.SetArma(data);
-        botonArma.sprite = data.sprite;
+        armaEquipada = arma;
+        this.arma.SetArma(arma.data);
+        botonArma.sprite = arma.data.sprite;
 
     }
 
@@ -367,5 +379,10 @@ public class Player : Character, IUpdateable
     public void DeployDrone()
     {
         drone.Deploy();
+    }
+
+    public void ActivateShield()
+    {
+        forceShield.SetActive(true);
     }
 }

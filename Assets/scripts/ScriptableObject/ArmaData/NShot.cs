@@ -28,7 +28,7 @@ public class NShot : ArmaData
             disparo.transform.position = arma.position + currentDesfase;
             disparo.posInicial = arma.position + currentDesfase;
             disparo.angulo = anguloDireccion + currentAngle;
-            disparo.setDamage(damage);
+            disparo.Disparar(damage,direccion);
 
 
             if (i%2 ==0)

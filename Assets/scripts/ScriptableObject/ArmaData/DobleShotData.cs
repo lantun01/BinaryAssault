@@ -17,11 +17,13 @@ public class DobleShotData : ArmaData
         shot1.transform.position = arma.position;
         shot1.posInicial = arma.position;
         shot1.angulo = direccion.Angulo();
+        shot1.Disparar(damage,direccion);
 
         shot2.SetPatron(patron2);
         shot2.transform.position = arma.position;
         shot2.posInicial = arma.position;
         shot2.angulo = direccion.Angulo();
         shot2.setDamage(damage);
+        shot2.Disparar(damage,direccion);
     }
 }
