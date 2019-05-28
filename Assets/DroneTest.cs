@@ -128,7 +128,7 @@ public class DroneTest : MonoBehaviour, IUpdateable
    public void Displace()
    {
       deployed = false;
-      UpdateManager.instance.RetirarElemento(this);
+      UpdateManager.instance.Unsubscribe(this);
       _animator.SetTrigger(morirTriggerHash);
    }
 

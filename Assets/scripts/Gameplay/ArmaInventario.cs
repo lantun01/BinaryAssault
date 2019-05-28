@@ -6,7 +6,7 @@ using UnityEngine;
 public class ArmaInventario
 {
    public ArmaData data;
-   public float municion;
+   public int municion;
 
    public bool TieneMunicion()
    {

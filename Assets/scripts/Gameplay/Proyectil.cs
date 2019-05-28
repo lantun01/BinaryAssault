@@ -54,7 +54,7 @@ public class Proyectil : Pooleable, IUpdateable
 
 
 
-    public override void Subscribir(IPooleableCaller caller)
+    public override void SubscribirCaller(IPooleableCaller caller)
     {
     }
 

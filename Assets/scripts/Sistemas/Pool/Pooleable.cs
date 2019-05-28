@@ -7,6 +7,6 @@ public abstract class Pooleable: MonoBehaviour
 {
     public abstract void Activar();
     public abstract void Reiniciar();
-    public abstract void Subscribir(IPooleableCaller caller);
+    public abstract void SubscribirCaller(IPooleableCaller caller);
     public abstract void Desactivar();
 }

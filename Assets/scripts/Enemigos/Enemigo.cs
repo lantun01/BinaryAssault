@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Enemigo : Pooleable
+public class Enemigo : Pooleable,IUpdateable
 {
     public TransformVariable playerTransform;
     private Rigidbody2D rb;
@@ -17,10 +17,6 @@ public class Enemigo : Pooleable
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        transform.Translate((playerTransform.value.position - transform.position).normalized * Time.deltaTime*2);
-    }
 
 
 
@@ -37,6 +33,7 @@ public class Enemigo : Pooleable
     {
         gameObject.SetActive(true);
         EnemyManager.instance.AddEnemigo(this);
+        Subscribir();
     }
 
     public override void Reiniciar()
@@ -44,7 +41,7 @@ public class Enemigo : Pooleable
 
     }
 
-    public override void Subscribir(IPooleableCaller caller)
+    public override void SubscribirCaller(IPooleableCaller caller)
     {
         this.caller = caller;
     }
@@ -53,6 +50,7 @@ public class Enemigo : Pooleable
     {
         gameObject.SetActive(false);
         EnemyManager.instance.RemoveEnemigo(this);
+        UpdateManager.instance.Unsubscribe(this);
         caller = null;
         
     }
@@ -69,5 +67,16 @@ public class Enemigo : Pooleable
         {
             Morir();
         }
+    }
+
+    public void CustomUpdate()
+    {
+        
+    }
+
+
+    public void Subscribir()
+    {
+       UpdateManager.instance.Subscribe(this);
     }
 }

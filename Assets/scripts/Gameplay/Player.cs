@@ -23,11 +23,14 @@ public class Player : Character, IUpdateable
     public Arma arma;
     [FormerlySerializedAs("layermask")] public LayerMask proyectilLayerMask;
     public TransformVariable transformValue;
+    [SerializeField] private IntVariable currentAmmo;
     public GameEvent RecibirAtaque;
+    public GameEvent ActualizarMunicion;
     public FloatVariable saludRatio;
     public ParticleSystem dashTrail;
     public DashSkill dashSkill;
     public EmiterController speedUpParticles,damageUpParticles;
+    public GameObject speedPowerUpParticle;
     public bool enCombate;
 
     [SerializeField]
@@ -57,7 +60,7 @@ public class Player : Character, IUpdateable
     private delegate void AccionPostDash();
     private bool armado;
     private float damageModifier, speedModifier;
-    [HideInInspector] public Interactuable interactuable; //Elemento con el cual el player va a interactuar
+    public Interactuable interactuable; //Elemento con el cual el player va a interactuar
     [SerializeField] private DroneTest drone;
     [SerializeField] private GameObject forceShield;
 
@@ -146,7 +149,9 @@ public class Player : Character, IUpdateable
         }
 
         armaEquipada.municion--;
-        
+        currentAmmo.variable = armaEquipada.municion;
+        ActualizarMunicion.Raise();
+
         if (objetivo)
         {
             arma.Disparar((objetivo.transform.position-arma.transform.position).normalized);
@@ -252,13 +257,17 @@ public class Player : Character, IUpdateable
 
         if (cantidadArmas>0)
         {
+            
             CambiarArma(_armas[armaActual]);
+            
         }
 
     }
 
     internal void CambiarArma(ArmaInventario arma)
     {
+        currentAmmo.variable = arma.municion;
+        ActualizarMunicion.Raise();
         armaEquipada = arma;
         this.arma.SetArma(arma.data);
         botonArma.sprite = arma.data.sprite;
@@ -342,7 +351,7 @@ public class Player : Character, IUpdateable
         StartCoroutine(Corroutines.Wait(time, () => material.SetFloat(blendOutlineId, 1f),
             () => material.SetFloat(blendOutlineId, 0f)));
         StartCoroutine(Corroutines.Wait(time, () => speedModifier += speed, () => this.speedModifier -= speed));
-        speedUpParticles.Play();
+        speedPowerUpParticle.SetActive(true);
     }
 
     public void SetInvulneravility(bool value)

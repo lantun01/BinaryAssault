@@ -28,7 +28,7 @@ public class PowerUp : Pooleable
     {
     }
 
-    public override void Subscribir(IPooleableCaller caller)
+    public override void SubscribirCaller(IPooleableCaller caller)
     {
     }
 

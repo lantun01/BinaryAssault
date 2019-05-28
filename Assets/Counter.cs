@@ -19,7 +19,7 @@ public class Counter : MonoBehaviour,IUpdateable
 
     private void OnDisable()
     {
-        UpdateManager.instance.RetirarElemento(this);
+        UpdateManager.instance.Unsubscribe(this);
     }
 
     private void OnEnable()

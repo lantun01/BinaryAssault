@@ -26,6 +26,7 @@ public class Dialogo : MonoBehaviour
 
       if (!iniciado)
       {
+          iniciado = true;
           startDialogue?.Invoke();
           instance.endDialogAction += EndDialog;
           instance.StartDialogue(this, transform.position + Vector3.up);
@@ -37,6 +38,7 @@ public class Dialogo : MonoBehaviour
    public void EndDialog()
    {
        endDialog?.Invoke();
+       instance.endDialogAction -= EndDialog;
    }
 
    public string this[int index] => dialogos[index];

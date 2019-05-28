@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 
 
-[CreateAssetMenu(menuName ="ScriptableOjects/Variables/float")]
+[CreateAssetMenu(menuName ="ScriptableObjects/Variables/float")]
 public class FloatVariable : ScriptableObject
 {
     //public Action<float> ValueChanged;

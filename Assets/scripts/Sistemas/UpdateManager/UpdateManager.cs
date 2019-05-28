@@ -21,7 +21,7 @@ public class UpdateManager : MonoBehaviour {
         elementos++;
     }
 
-    public void RetirarElemento(IUpdateable elemento)
+    public void Unsubscribe(IUpdateable elemento)
     {
         updateables.Remove(elemento);
         elementos--;

@@ -44,6 +44,7 @@ public class DialogManager : MonoBehaviour
 
     public void StartDialogue(Dialogo dialogo, Vector3 position)
     {
+        print("iniciadooo");
         StopAllCoroutines();
         textBox.gameObject.SetActive(true);
         dialogo.iniciado = true;
@@ -76,9 +77,9 @@ public class DialogManager : MonoBehaviour
     {
         currentLine = 0;
         _dialogo.iniciado = false;
+        textBox.gameObject.SetActive(false);
         endDialogue?.Raise();
         endDialogAction?.Invoke();
-        textBox.gameObject.SetActive(false);
     }
 
     private IEnumerator DialogAnimation(String dialog)
