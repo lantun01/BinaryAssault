@@ -29,8 +29,8 @@ public class Player : Character, IUpdateable
     public FloatVariable saludRatio;
     public ParticleSystem dashTrail;
     public DashSkill dashSkill;
-    public EmiterController speedUpParticles,damageUpParticles;
     public GameObject speedPowerUpParticle;
+    public GameObject powerUpParticle;
     public bool enCombate;
 
     [SerializeField]
@@ -51,18 +51,19 @@ public class Player : Character, IUpdateable
     private int cantidadArmas;
     public PlayerStateMachine stateMachine;
     private Material material;
-    private int hologramId, blendOutlineId; //Shaders prop
+    private int hologramId, blendOutlineId, outlineColorID; //Shaders prop
     private TrailRenderer trail;
     [HideInInspector] public Enemigo objetivo;
     private Enemigo previousEnemy;
     [SerializeField] private CameraControl cameraControl;
     private SpriteRenderer spriteRenderer;
-    private delegate void AccionPostDash();
     private bool armado;
     private float damageModifier, speedModifier;
     public Interactuable interactuable; //Elemento con el cual el player va a interactuar
     [SerializeField] private DroneTest drone;
     [SerializeField] private GameObject forceShield;
+
+    [SerializeField] private Color damageOutline, speedOutline;
 
 
     private void Awake()
@@ -78,6 +79,7 @@ public class Player : Character, IUpdateable
         material = GetComponent<SpriteRenderer>().material;
         hologramId = Shader.PropertyToID("_Hologram_Value_1");
         blendOutlineId = Shader.PropertyToID("_OperationBlend_Fade_1");
+        outlineColorID = Shader.PropertyToID("_OutlineEmpty_Color_1");
         trail = GetComponent<TrailRenderer>();
         transformValue.value = transform;
        // target.weight = 5;
@@ -345,14 +347,19 @@ public class Player : Character, IUpdateable
 
     public void PowerUpDamage(float damage, float time)
     {
-        damageUpParticles.Play();
-        print("Ataquee");
+        material.SetColor(outlineColorID,damageOutline);
+
         StartCoroutine(Corroutines.Wait(time, () => damageModifier += damage,
             () => damageModifier -= damage));
+        
+        StartCoroutine(Corroutines.Wait(time, () => material.SetFloat(blendOutlineId, 1f),
+            () => material.SetFloat(blendOutlineId, 0f)));
+        powerUpParticle.SetActive(true);
     }
 
     public void PowerUpSpeed(float speed, float time)
     {
+        material.SetColor(outlineColorID,speedOutline);
         StartCoroutine(Corroutines.Wait(time, () => material.SetFloat(blendOutlineId, 1f),
             () => material.SetFloat(blendOutlineId, 0f)));
         StartCoroutine(Corroutines.Wait(time, () => speedModifier += speed, () => this.speedModifier -= speed));

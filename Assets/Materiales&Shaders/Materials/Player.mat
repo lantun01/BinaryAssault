@@ -137,7 +137,7 @@ Material:
         a: 0.841851}
     - _Generate_3DPlanet_Light_Color_1: {r: 0.353443, g: 0.538434, b: 0.725597, a: 0.1747127}
     - _InnerGlowHQ_Color_1: {r: 1, g: 0.039973527, b: 0, a: 1}
-    - _OutlineEmpty_Color_1: {r: 0.7877358, g: 1, b: 0.97043675, a: 1}
+    - _OutlineEmpty_Color_1: {r: 1, g: 0.020645909, b: 0, a: 1}
     - _Outline_Color_1: {r: 0, g: 1, b: 0.9248905, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
     - _TintRGBA_Color_1: {r: 1, g: 1, b: 1, a: 1}
