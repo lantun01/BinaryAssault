@@ -23,12 +23,14 @@ public class UpdateManager : MonoBehaviour {
 
     public void Unsubscribe(IUpdateable elemento)
     {
-        updateables.Remove(elemento);
+        if (updateables.Remove(elemento))
+        {
         elementos--;
+        }
     }
 
 	// Update is called once per frame
-	void Update () {
+	private void Update () {
         for (int i = 0; i < elementos; i++)
         {
             updateables[i].CustomUpdate();
