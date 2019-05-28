@@ -95,18 +95,19 @@ public class Arma : MonoBehaviour
         }
     }
 
-    internal void Disparar(Vector3 mirada, float damageModifier)
+    internal bool Disparar(Vector3 mirada, float damageModifier)
     {
-        if (cooldown || !data) return;
+        if (cooldown || !data) return false;
         AnimarDisparar();
         _audioSource.Play();
         float damage = data.damage + damageModifier;
         data.Disparar(transform, mirada, damage );
         StartCoroutine(Corroutines.Wait(data.fireRate,() => cooldown = true,()=>cooldown = false));
+        return true;
     }
 
-    internal void Disparar(Vector3 mirada)
+    internal bool Disparar(Vector3 mirada)
     {
-        Disparar(mirada,0);
+      return Disparar(mirada,0);
     }
 }

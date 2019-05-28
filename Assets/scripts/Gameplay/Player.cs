@@ -141,25 +141,30 @@ public class Player : Character, IUpdateable
 
     internal void Disparar()
     {
-        
+
+        bool disparo;
         
         if (armaEquipada==null || !armaEquipada.TieneMunicion())
         {
             return;
         }
+        
 
-        armaEquipada.municion--;
-        currentAmmo.variable = armaEquipada.municion;
-        ActualizarMunicion.Raise();
 
         if (objetivo)
         {
-            arma.Disparar((objetivo.transform.position-arma.transform.position).normalized);
+          disparo = arma.Disparar((objetivo.transform.position-arma.transform.position).normalized);
         }
         else
         {
-            arma.Disparar(joystick.mirada);
+            disparo = arma.Disparar(joystick.mirada);
         }
+
+        if (disparo)
+            armaEquipada.municion--;
+        
+        currentAmmo.variable = armaEquipada.municion;
+        ActualizarMunicion.Raise();
     }
 
     internal void Mover()
