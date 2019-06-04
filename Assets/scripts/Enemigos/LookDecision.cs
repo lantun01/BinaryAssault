@@ -13,11 +13,11 @@ public class LookDecision : EnemyDecision
 
     private bool Look(EnemyStateMachine stateMachine)
     {
-        Vector3 playerPosition = stateMachine.enemy.player.transform.position;
+        Vector3 playerPosition = stateMachine.enemy.playerTransform.value.position;
         float distance = Vector3.Distance(playerPosition, stateMachine.transform.position);
         if (distance < stateMachine.distanciaAtaque)
         {
-            stateMachine.attackTarget = stateMachine.enemy.player.transform;
+            stateMachine.attackTarget = stateMachine.enemy.playerTransform.value;
             return true;
         }
         else return false;

@@ -82,6 +82,7 @@ public class Arma : MonoBehaviour
     public void SetArma(ArmaData armaData)
     {
         data = armaData;
+        if(sprite)
         sprite.sprite = data.sprite;
         _audioSource.clip = armaData.audio;
     }

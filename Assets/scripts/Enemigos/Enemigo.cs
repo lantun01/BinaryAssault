@@ -5,8 +5,7 @@ using System;
 
 public class Enemigo : Pooleable,IUpdateable
 {
-    [HideInInspector] public GameObject player;
-    [HideInInspector] public Arma arma;
+    public Arma arma;
     public TransformVariable playerTransform;
     public float speed;
     private Rigidbody2D rb;
@@ -20,20 +19,11 @@ public class Enemigo : Pooleable,IUpdateable
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         caminar = false;
-        player = GameObject.FindGameObjectWithTag("Player");
-        arma = new Arma();
+       
+        
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        Vector3 target = player.transform.position;
-        Vector3 direction = (target - transform.position).normalized;
-        if (caminar)
-        {      
-            rb.MovePosition(transform.position + direction * speed * Time.deltaTime);
-        }
-    }
+
 
     public void Caminar(bool caminar)
     {
@@ -98,11 +88,23 @@ public class Enemigo : Pooleable,IUpdateable
 
     public void CustomUpdate()
     {
+        Vector3 target = playerTransform.value.position;
+        Vector3 direction = (target - transform.position).normalized;
+        if (caminar)
+        {
+            rb.MovePosition(transform.position + direction * speed * Time.deltaTime);
+        }
 
+        arma.Disparar(direction);
     }
 
     public void Subscribir()
     {
         UpdateManager.instance.Subscribe(this);
+    }
+
+  public void RecibirGolpe(Proyectil proyectil)
+    {
+        print("me duele");
     }
 }

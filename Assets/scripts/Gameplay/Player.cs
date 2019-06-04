@@ -406,4 +406,9 @@ public class Player : Character, IUpdateable
     {
         forceShield.SetActive(true);
     }
+
+    public void RecibirGolpePorProyectil(Proyectil p)
+    {
+        GetDamage((int)p.damage);
+    }
 }

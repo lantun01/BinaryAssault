@@ -9,7 +9,7 @@ public class Proyectil : Pooleable, IUpdateable
     public Vector3 posInicial;
     public float angulo;
     private PatronDisparo patron;
-    private float damage;
+    public float damage;
 
 
     public void setDamage(float damage)
@@ -63,9 +63,15 @@ public class Proyectil : Pooleable, IUpdateable
         Desactivar();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        Desactivar();
+        Atacable objetivo = collision.gameObject.GetComponent<Atacable>();
+        if (objetivo)
+        {
+            objetivo.RecibirGolpe?.Invoke(this);
+            Desactivar();
+        }
     }
 
     public void CustomUpdate()

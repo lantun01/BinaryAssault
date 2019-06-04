@@ -10,13 +10,14 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     [SerializeField] private PlayerUI UI;
+    [SerializeField] private FloatVariable saludRatio;
 
     [SerializeField] private PlayerUIOption uiOption;
     // Start is called before the first frame update
 
     private void Awake()
     {
-        
+        saludRatio.value = 1;
         if (instance == null)
         {
             instance = this;
