@@ -162,7 +162,7 @@ public class Player : Character, IUpdateable
             disparo = arma.Disparar(joystick.mirada);
         }
 
-        if (disparo)
+        if (disparo && !armaEquipada.data.municionInfinita)
             armaEquipada.municion--;
         
         currentAmmo.variable = armaEquipada.municion;

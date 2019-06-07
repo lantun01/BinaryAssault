@@ -19,7 +19,10 @@ public class InteractionCollider : MonoBehaviour
         interactuable = other.GetComponent<Interactuable>();
         player.interactuable = interactuable;
         player.SetAction(interactuable.Interaccion);
+        if (interactuable.interaccionIcon)
+        {
         player.botonAccion.sprite = interactuable.interaccionIcon;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)

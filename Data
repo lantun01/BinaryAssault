@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<GameData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <deuda>100</deuda>
+  <nivelActual>5</nivelActual>
+  <armas>
+    <string>OLD FRIEND</string>
+    <string>Boton color Caramelo</string>
+    <string>Teclado</string>
+  </armas>
+</GameData>

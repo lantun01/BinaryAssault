@@ -32,11 +32,16 @@ public class EnemyWaveManager : MonoBehaviour
     {
         if (collision.gameObject.layer==10)
         {
+            StartEncounter();
+        }
+    }
+
+    public void StartEncounter()
+    {
         startWave?.Invoke();
         SpawnNextWave();
         boxCollider.enabled = false;
         EnemyManager.instance.StartEncounter();
-        }
     }
 
     private void OnValidate()
