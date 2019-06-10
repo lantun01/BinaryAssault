@@ -42,7 +42,7 @@ public class Player : Character, IUpdateable
     public Image botonAccion;
     [SerializeField] private Sprite defaultActionSprite;
     
-    private  List<ArmaInventario> _armas = new List<ArmaInventario>();
+    [HideInInspector]public List<ArmaInventario> armas = new List<ArmaInventario>();
     private ArmaInventario armaEquipada;
     public ParticleSystem polvoCaminar;
     private ParticleSystem.EmissionModule polvoEmission;
@@ -247,7 +247,7 @@ public class Player : Character, IUpdateable
         cantidadArmas++;
         armaActual = cantidadArmas-1;
         ArmaInventario newArma = new ArmaInventario(armaData);
-        _armas.Add(newArma);
+        armas.Add(newArma);
         CambiarArma(newArma);
     }
 
@@ -265,7 +265,7 @@ public class Player : Character, IUpdateable
         if (cantidadArmas>0)
         {
             
-            CambiarArma(_armas[armaActual]);
+            CambiarArma(armas[armaActual]);
             
         }
 
@@ -405,5 +405,17 @@ public class Player : Character, IUpdateable
     public void ActivateShield()
     {
         forceShield.SetActive(true);
+    }
+
+    public void LoadWeapons(List<ArmaData> armas)
+    {
+        if (armas == null)
+        {
+            return;
+        }
+        foreach (var arma in armas)
+        {
+            AgregarArma(arma);
+        }
     }
 }

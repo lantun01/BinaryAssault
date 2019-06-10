@@ -5,9 +5,9 @@ using UnityEngine;
 
 
 [System.Serializable]
-public struct PlayerUIOption
+public struct AvailableSkills
 {
-    public bool dash, upgrade, robot;
+    public bool dash, shield, drone;
 }
 
 public class PlayerUI : MonoBehaviour
@@ -26,12 +26,12 @@ public class PlayerUI : MonoBehaviour
         UIElementsCount = toggleableUIElements.Length;
     }
 
-    public void setUI(PlayerUIOption options)
+    public void setUI(AvailableSkills options)
     {
         bool
             dashEnable = (options.dash),
-            upgradeEnable = (options.upgrade),
-            robotEnable = (options.robot);
+            upgradeEnable = (options.shield),
+            robotEnable = (options.drone);
 
         botonDash.SetActive(dashEnable);
 

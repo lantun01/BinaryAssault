@@ -43,6 +43,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7751eea9a80e3c4586ffd549b152b54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1779449282
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1779449284}
+  - component: {fileID: 1779449283}
+  m_Layer: 0
+  m_Name: StateManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1779449284
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1779449282}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5912757797399050722}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1779449283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1779449282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a762256f66d37134286d6424c2aaf5fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playingState: {fileID: 11400000, guid: 6c2b249c2a48bcb499866f3613c3e6eb, type: 2}
+  waitingState: {fileID: 11400000, guid: e36cc15ff475d274ab867de460239448, type: 2}
 --- !u!1 &5912757797240306724
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,6 +174,7 @@ Transform:
   - {fileID: 5912757798173686259}
   - {fileID: 1777373858}
   - {fileID: 5912757797322909239}
+  - {fileID: 1779449284}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -144,11 +190,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a6c5e477da874b4d9e38e78fab7ca8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameData: {fileID: 11400000, guid: d856836921e625f4bad4e1f0ea089fe9, type: 2}
   UI: {fileID: 0}
-  uiOption:
-    dash: 1
-    upgrade: 1
-    robot: 1
+  playerTransform: {fileID: 11400000, guid: 6b48f55650a14f14695b4fac6c02303a, type: 2}
 --- !u!1 &5912757797413768613
 GameObject:
   m_ObjectHideFlags: 0
@@ -349,6 +393,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyManager
       objectReference: {fileID: 0}
+    - target: {fileID: 4353128260337451726, guid: c0dc4b5248087614698788b71321bc15,
+        type: 3}
+      propertyPath: response.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4353128260337451727, guid: c0dc4b5248087614698788b71321bc15,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -403,11 +452,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4353128260337451726, guid: c0dc4b5248087614698788b71321bc15,
-        type: 3}
-      propertyPath: response.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0dc4b5248087614698788b71321bc15, type: 3}

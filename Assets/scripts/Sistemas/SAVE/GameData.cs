@@ -8,6 +8,14 @@ public class GameData
 
     public string[] armas;
 
+    public string userName;
+
+    public bool hasShield;
+
+    public bool hasDash;
+
+    public bool hasDrone;
+
 }
 
 
